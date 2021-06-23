@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:todolist/src/features/todos/domain/entities/main_todo.dart';
+import 'package:todolist/src/features/todos/domain/entities/todo.dart';
 
 void main() {
   runApp(MyApp());
@@ -61,12 +63,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
+    final MainTodo task = MainTodo(title: 'First todo');
+    final Map<String, dynamic> taskMap = task.toMap();
+    MainTodo taskFromMap = MainTodo.fromMap(taskMap);
+    taskFromMap = taskFromMap.copyWith(subtasks: [Todo(title: 'First')]);
+    print(taskFromMap);
+
     return Scaffold(
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
