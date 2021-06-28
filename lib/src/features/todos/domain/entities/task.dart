@@ -2,14 +2,14 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
-import 'package:todolist/src/features/todos/domain/entities/todo.dart';
+import 'todo.dart';
 
-class MainTodo extends Todo {
+class Task extends Todo {
   final DateTime? date;
   final String? description;
   final List<Todo> subtasks;
 
-  MainTodo({
+  Task({
     required String title,
     bool completed = false,
     this.date,
@@ -18,14 +18,14 @@ class MainTodo extends Todo {
   }) : super(title: title, completed: completed);
 
 
-  MainTodo copyWith({
+  Task copyWith({
     String? title,
     bool? completed,
     DateTime? date,
     String? description,
     List<Todo>? subtasks,
   }) {
-    return MainTodo(
+    return Task(
       title: title ?? super.title,
       completed: completed ?? super.completed,
       date: date ?? this.date,
@@ -44,8 +44,8 @@ class MainTodo extends Todo {
     };
   }
 
-  factory MainTodo.fromMap(Map<String, dynamic> map) {
-    return MainTodo(
+  factory Task.fromMap(Map<String, dynamic> map) {
+    return Task(
       title: map['title'],
       completed: map['completed'],
       date: map['date'] != null ? DateTime.fromMillisecondsSinceEpoch(map['date']) : null,
@@ -56,7 +56,7 @@ class MainTodo extends Todo {
 
   String toJson() => json.encode(toMap());
 
-  factory MainTodo.fromJson(String source) => MainTodo.fromMap(json.decode(source));
+  factory Task.fromJson(String source) => Task.fromMap(json.decode(source));
 
   @override
   String toString() => 'MainTodo(title: ${super.title}, completed: ${super.completed} date: $date, description: $description, subtasks: $subtasks)';
@@ -65,7 +65,7 @@ class MainTodo extends Todo {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
   
-    return other is MainTodo &&
+    return other is Task &&
       other.title == super.title &&
       other.completed == super.completed &&
       other.date == date &&
@@ -74,5 +74,5 @@ class MainTodo extends Todo {
   }
 
   @override
-  int get hashCode => title.hashCode ^ completed.hashCode ^ date.hashCode ^ description.hashCode ^ subtasks.hashCode; //TODO test if title and completed need to be called from super
+  int get hashCode => super.title.hashCode ^ super.completed.hashCode ^ date.hashCode ^ description.hashCode ^ subtasks.hashCode;
 }
