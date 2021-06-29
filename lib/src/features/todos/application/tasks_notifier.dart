@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
-import 'package:todolist/src/features/todos/application/tasks_state.dart';
-import 'package:todolist/src/features/todos/domain/entities/task.dart';
+import 'tasks_state.dart';
+import '../domain/entities/task.dart';
 
-import 'package:todolist/src/features/todos/domain/interface/i_tasks_repository.dart';
+import '../domain/interface/i_tasks_repository.dart';
 
 class TasksNotifier extends ChangeNotifier {
   final ITasksRepository tasksRepository;
