@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todolist/src/features/todos/application/tasks_notifier.dart';
-import 'package:todolist/src/features/todos/application/tasks_provider.dart';
-import 'package:todolist/src/features/todos/presentation/pages/home/home_page.dart';
+import '../../../application/tasks_notifier.dart';
+import '../../../application/tasks_provider.dart';
+import '../home/home_page.dart';
 
 class SplashScreenPage extends StatelessWidget {
   @override

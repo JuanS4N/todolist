@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todolist/src/features/todos/application/tasks_notifier.dart';
-import 'package:todolist/src/features/todos/data/repositories/hive_tasks_repository.dart';
-import 'package:todolist/src/features/todos/domain/interface/i_tasks_repository.dart';
+import 'tasks_notifier.dart';
+import '../data/repositories/hive_tasks_repository.dart';
+import '../domain/interface/i_tasks_repository.dart';
 
 final localTasksRepository = Provider<ITasksRepository>((ref) {
   return HiveTasksRepository();
