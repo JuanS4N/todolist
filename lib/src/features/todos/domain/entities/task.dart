@@ -28,6 +28,7 @@ class Task extends Todo {
     List<Todo>? subtasks,
   }) {
     return Task(
+      id: super.id,
       title: title ?? super.title,
       completed: completed ?? super.completed,
       modified: modified ?? super.modified,
@@ -42,7 +43,7 @@ class Task extends Todo {
       'id': super.id,
       'title': super.title,
       'completed': super.completed,
-      'modified': super.modified,
+      'modified': super.modified.millisecondsSinceEpoch,
       'date': date?.millisecondsSinceEpoch,
       'description': description,
       'subtasks':
@@ -50,7 +51,7 @@ class Task extends Todo {
     };
   }
 
-  factory Task.fromMap(Map<String, dynamic> map) {
+  factory Task.fromMap(Map<dynamic, dynamic> map) {
     return Task(
       id: map['id'],
       title: map['title'],
@@ -60,7 +61,9 @@ class Task extends Todo {
           ? DateTime.fromMillisecondsSinceEpoch(map['date'])
           : null,
       description: map['description'],
-      subtasks: List<Todo>.from(map['subtasks']?.map((x) => Todo.fromMap(x))),
+      subtasks: map['subtasks'] != null
+          ? List<Todo>.from(map['subtasks']?.map((x) => Todo.fromMap(x)))
+          : [],
     );
   }
 

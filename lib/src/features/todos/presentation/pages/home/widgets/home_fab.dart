@@ -1,14 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:todolist/src/features/todos/application/tasks_provider.dart';
+import 'package:todolist/src/features/todos/domain/entities/task.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todolist/src/features/todos/domain/entities/todo.dart';
 
-class HomeFAB extends StatelessWidget {
+class HomeFAB extends ConsumerWidget {
   const HomeFAB({
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ScopedReader watch) {
     return FloatingActionButton(
-      onPressed: () {},
+      onPressed: () {
+        final newTask = Task(
+          title: 'Segundo task con todos los datos',
+          modified: DateTime.now(),
+          date: DateTime(2021, 8, 12),
+          description: 'Task description',
+          subtasks: [
+            Todo(
+              title: 'Subtask 1',
+              modified: DateTime.now(),
+            ),
+            Todo(
+              title: 'Subtask 2',
+              modified: DateTime.now(),
+            ),
+            Todo(
+              title: 'Subtask 3',
+              modified: DateTime.now(),
+            ),
+          ],
+        );
+        context.read(tasksNotifierProvider).createTask(task: newTask);
+      },
       child: Icon(Icons.add),
       elevation: 0.0,
     );
