@@ -21,13 +21,14 @@ class Todo {
     DateTime? modified,
   }) {
     return Todo(
+      id: this.id,
       title: title ?? this.title,
       completed: completed ?? this.completed,
       modified: modified ?? this.modified,
     );
   }
 
-  Map<String, dynamic> toMap() {
+  Map<dynamic, dynamic> toMap() {
     return {
       'id': id,
       'title': title,
@@ -36,7 +37,7 @@ class Todo {
     };
   }
 
-  factory Todo.fromMap(Map<String, dynamic> map) {
+  factory Todo.fromMap(Map<dynamic, dynamic> map) {
     return Todo(
       id: map['id'],
       title: map['title'],

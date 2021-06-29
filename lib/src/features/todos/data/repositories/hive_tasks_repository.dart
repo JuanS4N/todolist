@@ -17,8 +17,8 @@ class HiveTasksRepository implements ITasksRepository {
       {required String taskId}) async {
     try {
       if (!Hive.isBoxOpen('tasks'))
-        await Hive.openBox<Map<String, dynamic>>('tasks');
-      await Hive.box<Map<String, dynamic>>('tasks').delete(taskId);
+        await Hive.openBox<Map<dynamic, dynamic>>('tasks');
+      await Hive.box<Map<dynamic, dynamic>>('tasks').delete(taskId);
       return right(unit);
     } catch (e) {
       return left(const DatabaseFailure.serverError());
@@ -29,8 +29,8 @@ class HiveTasksRepository implements ITasksRepository {
   Future<Either<DatabaseFailure, List<TaskEntity.Task>>> readTasks() async {
     try {
       if (!Hive.isBoxOpen('tasks'))
-        await Hive.openBox<Map<String, dynamic>>('tasks');
-      final tasks = Hive.box<Map<String, dynamic>>('tasks')
+        await Hive.openBox<Map<dynamic, dynamic>>('tasks');
+      final tasks = Hive.box<Map<dynamic, dynamic>>('tasks')
           .values
           .map((taskMap) => TaskEntity.Task.fromMap(taskMap))
           .toList();
@@ -49,8 +49,8 @@ class HiveTasksRepository implements ITasksRepository {
       {required TaskEntity.Task task}) async {
     try {
       if (!Hive.isBoxOpen('tasks'))
-        await Hive.openBox<Map<String, dynamic>>('tasks');
-      await Hive.box<Map<String, dynamic>>('tasks').put(task.id, task.toMap());
+        await Hive.openBox<Map<dynamic, dynamic>>('tasks');
+      await Hive.box<Map<dynamic, dynamic>>('tasks').put(task.id, task.toMap());
       return right(unit);
     } catch (e) {
       return left(const DatabaseFailure.serverError());

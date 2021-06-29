@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todolist/src/features/todos/application/tasks_provider.dart';
 
 import '../logic/tasks_providers.dart';
 import 'animated_tasks_list.dart';
@@ -19,7 +20,7 @@ class _TasksListState extends State<TasksList> {
   Widget build(BuildContext context) {
     return Consumer(builder: (contex, watch, child) {
       final read = context.read(tasksListProvider);
-      final tasksProvider = watch(tasksListProvider);
+      final tasksNotifier = watch(tasksNotifierProvider);
 
       return SafeArea(
         child: CustomScrollView(
@@ -38,7 +39,7 @@ class _TasksListState extends State<TasksList> {
             ),
             AnimatedTasksList(
                 myKey: _uncompletedKey,
-                tasks: tasksProvider.uncompletedTasks,
+                tasks: tasksNotifier.uncompletedTasks,
                 onChanged: (task, index) {
                   read.animatedTaskChange(
                     index,
@@ -47,25 +48,6 @@ class _TasksListState extends State<TasksList> {
                     _completedKey.currentState!,
                   );
                 }),
-            // SliverAnimatedList(
-            //   key: _uncompletedKey,
-            //   initialItemCount: read.uncompletedTasks.length,
-            //   itemBuilder: (context, index, animation) {
-            //     Task task = read.uncompletedTasks[index];
-            //     return TaskTile(
-            //       task: task,
-            //       animation: animation,
-            //       onChanged: () {
-            //         read.animatedTaskChange(
-            //           index,
-            //           task,
-            //           _uncompletedKey.currentState!,
-            //           _completedKey.currentState!,
-            //         );
-            //       },
-            //     );
-            //   },
-            // ),
             SliverToBoxAdapter(
               child: Text(
                 "Completed",
@@ -74,7 +56,7 @@ class _TasksListState extends State<TasksList> {
             ),
             AnimatedTasksList(
                 myKey: _completedKey,
-                tasks: tasksProvider.completedTasks,
+                tasks: tasksNotifier.completedTasks,
                 onChanged: (task, index) {
                   read.animatedTaskChange(
                     index,
