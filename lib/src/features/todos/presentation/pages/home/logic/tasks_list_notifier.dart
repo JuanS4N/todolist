@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todolist/src/features/todos/domain/entities/task.dart';
-import 'package:todolist/src/features/todos/presentation/pages/home/widgets/task_tile.dart';
+import '../../../../domain/entities/task.dart';
+import '../widgets/task_tile.dart';
 
 class TasksListNotifier extends ChangeNotifier {
   final tasks = [
