@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todolist/src/features/todos/domain/entities/task.dart';
-import 'package:todolist/src/features/todos/presentation/pages/home/logic/tasks_list_notifier.dart';
-import 'package:todolist/src/features/todos/presentation/pages/home/logic/tasks_providers.dart';
-import 'package:todolist/src/features/todos/presentation/pages/home/widgets/task_tile.dart';
 
+import '../logic/tasks_providers.dart';
 import 'animated_tasks_list.dart';
 
 class TasksList extends StatefulWidget {

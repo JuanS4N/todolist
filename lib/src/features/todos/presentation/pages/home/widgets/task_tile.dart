@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todolist/src/features/todos/domain/entities/task.dart';
+
+import '../../../../domain/entities/task.dart';
 
 class TaskTile extends StatelessWidget {
   const TaskTile({
