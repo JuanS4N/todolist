@@ -4,11 +4,27 @@ import 'package:todolist/src/features/todos/presentation/pages/home/widgets/task
 
 class TasksListNotifier extends ChangeNotifier {
   final tasks = [
-    Task(title: 'Comprar zanahorias', date: DateTime(2020, 1)),
-    Task(title: 'Bañar a los perros', date: DateTime(2020, 2)),
-    Task(title: 'Lavar la ropa', date: DateTime(2020, 3)),
-    Task(title: 'Llamar a Jorge', date: DateTime(2020, 4)),
-    Task(title: 'Pagar servicios', completed: true, date: DateTime(2020, 5)),
+    Task(
+        title: 'Comprar zanahorias',
+        date: DateTime(2020, 1),
+        modified: DateTime.now()),
+    Task(
+        title: 'Bañar a los perros',
+        date: DateTime(2020, 2),
+        modified: DateTime.now()),
+    Task(
+        title: 'Lavar la ropa',
+        date: DateTime(2020, 3),
+        modified: DateTime.now()),
+    Task(
+        title: 'Llamar a Jorge',
+        date: DateTime(2020, 4),
+        modified: DateTime.now()),
+    Task(
+        title: 'Pagar servicios',
+        completed: true,
+        date: DateTime(2020, 5),
+        modified: DateTime.now()),
   ];
 
   List<Task> get uncompletedTasks =>
