@@ -15,11 +15,21 @@ class TaskTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Tween<Offset> _myTween = Tween(begin: Offset(1, 0), end: Offset(0, 0));
-    return SlideTransition(
-      position: animation.drive(_myTween),
-      child: _build(),
-    );
+    //Tween<Offset> _myTween = Tween(begin: Offset(1, 0), end: Offset(0, 0));
+    return onChanged != null
+        ? SizeTransition(
+            sizeFactor: animation,
+            axisAlignment: 1,
+            child: _build(),
+          )
+        : FadeTransition(
+            opacity: animation,
+            child: _build(),
+          );
+    // return SlideTransition(
+    //   position: animation.drive(_myTween),
+    //   child: _build(),
+    // );
   }
 
   RadioListTile<int> _build() {

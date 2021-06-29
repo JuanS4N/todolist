@@ -5,6 +5,8 @@ import 'package:todolist/src/features/todos/presentation/pages/home/logic/tasks_
 import 'package:todolist/src/features/todos/presentation/pages/home/logic/tasks_providers.dart';
 import 'package:todolist/src/features/todos/presentation/pages/home/widgets/task_tile.dart';
 
+import 'animated_tasks_list.dart';
+
 class TasksList extends StatefulWidget {
   TasksList({Key? key}) : super(key: key);
 
@@ -20,7 +22,8 @@ class _TasksListState extends State<TasksList> {
   Widget build(BuildContext context) {
     return Consumer(builder: (contex, watch, child) {
       final read = context.read(tasksListProvider);
-      //final tasksProvider = watch(tasksListProvider);
+      final tasksProvider = watch(tasksListProvider);
+
       return SafeArea(
         child: CustomScrollView(
           slivers: [
@@ -30,92 +33,56 @@ class _TasksListState extends State<TasksList> {
                 style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
               ),
             ),
-            SliverAnimatedList(
-              key: _uncompletedKey,
-              initialItemCount: read.uncompletedTasks.length,
-              itemBuilder: (context, index, animation) {
-                Task task = read.uncompletedTasks[index];
-                return TaskTile(
-                  task: task,
-                  animation: animation,
-                  onChanged: () {
-                    read.animatedTaskChange(
-                      index,
-                      task,
-                      _uncompletedKey.currentState!,
-                      _completedKey.currentState!,
-                      TaskTile(task: task, animation: animation),
-                    );
-                  },
-                );
-              },
-            ),
+            AnimatedTasksList(
+                myKey: _uncompletedKey,
+                tasks: tasksProvider.uncompletedTasks,
+                onChanged: (task, index) {
+                  read.animatedTaskChange(
+                    index,
+                    task,
+                    _uncompletedKey.currentState!,
+                    _completedKey.currentState!,
+                  );
+                }),
+            // SliverAnimatedList(
+            //   key: _uncompletedKey,
+            //   initialItemCount: read.uncompletedTasks.length,
+            //   itemBuilder: (context, index, animation) {
+            //     Task task = read.uncompletedTasks[index];
+            //     return TaskTile(
+            //       task: task,
+            //       animation: animation,
+            //       onChanged: () {
+            //         read.animatedTaskChange(
+            //           index,
+            //           task,
+            //           _uncompletedKey.currentState!,
+            //           _completedKey.currentState!,
+            //         );
+            //       },
+            //     );
+            //   },
+            // ),
             SliverToBoxAdapter(
               child: Text(
                 "Completed",
                 style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.normal),
               ),
             ),
-            SliverAnimatedList(
-              key: _completedKey,
-              initialItemCount: read.completedTasks.length,
-              itemBuilder: (context, index, animation) {
-                Task task = read.completedTasks[index];
-                return TaskTile(
-                  task: task,
-                  animation: animation,
-                  onChanged: () {
-                    read.animatedTaskChange(
-                      index,
-                      task,
-                      _completedKey.currentState!,
-                      _uncompletedKey.currentState!,
-                      TaskTile(task: task, animation: animation),
-                    );
-                  },
-                );
-              },
-            )
+            AnimatedTasksList(
+                myKey: _completedKey,
+                tasks: tasksProvider.completedTasks,
+                onChanged: (task, index) {
+                  read.animatedTaskChange(
+                    index,
+                    task,
+                    _completedKey.currentState!,
+                    _uncompletedKey.currentState!,
+                  );
+                }),
           ],
         ),
       );
     });
-
-    // return Consumer(builder: (context, watch, child) {
-    //   final tasksProvider = watch(tasksListProvider);
-    //   final read = context.read(tasksListProvider);
-    //   return ListView(
-    //     children: [
-    //       Text('List title'),
-    //       Column(
-    //         children: tasksProvider.uncompletedTasks
-    //             .map(
-    //               (task) => RadioListTile(
-    //                 value: 0,
-    //                 groupValue: 1,
-    //                 onChanged: (_) => read.onTaskChanged(task),
-    //                 title: Text(task.title),
-    //               ),
-    //             )
-    //             .toList(),
-    //       ),
-    //       Text('Completed'),
-    //       Column(
-    //         children: tasksProvider.completedTasks
-    //             .map(
-    //               (task) => RadioListTile(
-    //                 value: 0,
-    //                 groupValue: 0,
-    //                 selected: true,
-    //                 toggleable: true,
-    //                 onChanged: (_) => read.onTaskChanged(task),
-    //                 title: Text(task.title),
-    //               ),
-    //             )
-    //             .toList(),
-    //       ),
-    //     ],
-    //   );
-    // });
   }
 }

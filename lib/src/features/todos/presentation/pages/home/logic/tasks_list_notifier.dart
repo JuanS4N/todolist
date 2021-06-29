@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todolist/src/features/todos/domain/entities/task.dart';
+import 'package:todolist/src/features/todos/presentation/pages/home/widgets/task_tile.dart';
 
 class TasksListNotifier extends ChangeNotifier {
   final tasks = [
@@ -18,19 +19,18 @@ class TasksListNotifier extends ChangeNotifier {
   void onTaskChanged(Task task) {
     tasks.remove(task);
     tasks.insert(0, task.copyWith(completed: !task.completed));
-    //notifyListeners();
+    notifyListeners();
   }
 
-  void animatedTaskChange(
-    int index,
-    Task task,
-    SliverAnimatedListState from,
-    SliverAnimatedListState to,
-    Widget child
-  ) {
+  void animatedTaskChange(int index, Task task, SliverAnimatedListState from,
+      SliverAnimatedListState to) {
+    int _duration = 250;
+    from.removeItem(
+      index,
+      (context, animation) => TaskTile(task: task, animation: animation),
+      duration: Duration(milliseconds: _duration),
+    );
     onTaskChanged(task);
-    int _duration = 500;
-    from.removeItem(index, (context, animation) => child, duration: Duration(milliseconds: _duration));
     to.insertItem(0);
   }
 }
