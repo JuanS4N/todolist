@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart' hide Task;
 import 'package:flutter/foundation.dart';
-import 'package:todolist/src/features/todos/domain/entities/database_failures/database_failure.dart';
+import '../domain/entities/database_failures/database_failure.dart';
 import '../domain/entities/task.dart';
 
 import '../domain/interface/i_tasks_repository.dart';

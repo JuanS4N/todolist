@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart' hide Task;
 import 'package:hive/hive.dart';
-import 'package:todolist/src/features/todos/domain/entities/task.dart';
-import 'package:todolist/src/features/todos/domain/interface/i_tasks_repository.dart';
+import '../../domain/entities/task.dart';
+import '../../domain/interface/i_tasks_repository.dart';
 
 import '../../domain/entities/database_failures/database_failure.dart';
 
