@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../../../application/tasks_provider.dart';
 import '../../../../domain/entities/task.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../domain/entities/todo.dart';
 
 class HomeFAB extends ConsumerWidget {
   const HomeFAB({
@@ -14,23 +13,14 @@ class HomeFAB extends ConsumerWidget {
     return FloatingActionButton(
       onPressed: () {
         final newTask = Task(
-          title: 'Llamar a Jorge',
+          title: 'Otra Task con subtasks (referencias mockeadas)',
           modified: DateTime.now(),
           date: DateTime(2021, 8, 12),
           description: 'Task description',
           subtasks: [
-            Todo(
-              title: 'Subtask 1',
-              modified: DateTime.now(),
-            ),
-            Todo(
-              title: 'Subtask 2',
-              modified: DateTime.now(),
-            ),
-            Todo(
-              title: 'Subtask 3',
-              modified: DateTime.now(),
-            ),
+            UniqueKey().toString(),
+            UniqueKey().toString(),
+            UniqueKey().toString(),
           ],
         );
         context.read(tasksNotifierProvider).createTask(task: newTask);
