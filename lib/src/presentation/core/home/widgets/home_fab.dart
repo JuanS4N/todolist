@@ -14,7 +14,7 @@ class HomeFAB extends ConsumerWidget {
     return FloatingActionButton(
       onPressed: () {
         final newTask = Task(
-          title: 'Segundo task con todos los datos',
+          title: 'Llamar a Jorge',
           modified: DateTime.now(),
           date: DateTime(2021, 8, 12),
           description: 'Task description',
