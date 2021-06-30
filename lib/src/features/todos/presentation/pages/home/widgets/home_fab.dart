@@ -13,10 +13,11 @@ class HomeFAB extends ConsumerWidget {
     return FloatingActionButton(
       onPressed: () {
         final newTask = Task(
-          title: 'Otra Task con subtasks (referencias mockeadas)',
+          title: 'Subtask',
           modified: DateTime.now(),
           date: DateTime(2021, 8, 12),
           description: 'Task description',
+          parentTask: UniqueKey().toString(),
           subtasks: [
             UniqueKey().toString(),
             UniqueKey().toString(),
