@@ -23,8 +23,10 @@ class Task {
     this.subtasks = const <String>[],
   })  : this.id = id ?? UniqueKey().toString(),
         this.modified = modified ?? DateTime.now(),
-        assert(parentTask == null || subtasks.isEmpty,
-            'A subtask cannot contain other subtasks');
+        assert(
+            parentTask == null || subtasks.isEmpty,
+            'A subtask cannot contain other subtasks\n'
+            'If parentTask != null, subtasks must be empty');
 
   Task copyWith({
     String? title,
@@ -32,6 +34,7 @@ class Task {
     DateTime? modified,
     DateTime? date,
     String? description,
+    String? parentTask,
     List<String>? subtasks,
   }) {
     return Task(
@@ -41,6 +44,7 @@ class Task {
       modified: modified ?? this.modified,
       date: date ?? this.date,
       description: description ?? this.description,
+      parentTask: parentTask ?? this.parentTask,
       subtasks: subtasks ?? this.subtasks,
     );
   }
@@ -53,6 +57,7 @@ class Task {
       'modified': modified.millisecondsSinceEpoch,
       'date': date?.millisecondsSinceEpoch,
       'description': description,
+      'parent_task': parentTask,
       'subtasks': subtasks,
     };
   }
@@ -67,6 +72,7 @@ class Task {
           ? DateTime.fromMillisecondsSinceEpoch(map['date'])
           : null,
       description: map['description'],
+      parentTask: map['parent_task'],
       subtasks: List<String>.from(map['subtasks']),
     );
   }
@@ -77,7 +83,7 @@ class Task {
 
   @override
   String toString() {
-    return 'Task(id: $id, title: $title, completed: $completed, modified: $modified, date: $date, description: $description, subtasks: $subtasks)';
+    return 'Task(id: $id, title: $title, completed: $completed, modified: $modified, date: $date, description: $description, parentTask: $parentTask, subtasks: $subtasks)';
   }
 
   @override
@@ -91,6 +97,7 @@ class Task {
         other.modified == modified &&
         other.date == date &&
         other.description == description &&
+        other.parentTask == parentTask &&
         listEquals(other.subtasks, subtasks);
   }
 
@@ -102,6 +109,7 @@ class Task {
         modified.hashCode ^
         date.hashCode ^
         description.hashCode ^
+        parentTask.hashCode ^
         subtasks.hashCode;
   }
 }
