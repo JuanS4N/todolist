@@ -47,9 +47,14 @@ class TasksNotifier extends ChangeNotifier {
   }
 
   //TODO complete task
+  toggleTaskCompleted({required Task task}) {
+    final newTaskInfo =
+        task.copyWith(completed: !task.completed, modified: DateTime.now());
+    updateTask(newTaskInfo: newTaskInfo);
+  }
 
   Future<void> updateTask({required Task newTaskInfo}) async {
-    newTaskInfo = newTaskInfo.copyWith(modified: DateTime.now());
+    // newTaskInfo = newTaskInfo.copyWith(modified: DateTime.now());
     final index = _tasks.indexWhere((task) => task.id == newTaskInfo.id);
     _tasks[index] = newTaskInfo;
     _sortTasks();
