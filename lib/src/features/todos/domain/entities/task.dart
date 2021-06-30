@@ -10,6 +10,7 @@ class Task {
   final DateTime modified;
   final DateTime? date;
   final String? description;
+  final String? parentTask;
   final List<String> subtasks; //T
   Task({
     String? id,
@@ -18,9 +19,12 @@ class Task {
     DateTime? modified,
     this.date,
     this.description,
+    this.parentTask,
     this.subtasks = const <String>[],
   })  : this.id = id ?? UniqueKey().toString(),
-        this.modified = modified ?? DateTime.now();
+        this.modified = modified ?? DateTime.now(),
+        assert(parentTask == null || subtasks.isEmpty,
+            'A subtask cannot contain other subtasks');
 
   Task copyWith({
     String? title,
