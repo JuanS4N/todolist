@@ -1,5 +1,6 @@
+import 'package:dartz/dartz.dart' hide Task;
 import 'package:flutter/foundation.dart';
-import 'tasks_state.dart';
+import 'package:todolist/src/features/todos/domain/entities/database_failures/database_failure.dart';
 import '../domain/entities/task.dart';
 
 import '../domain/interface/i_tasks_repository.dart';
@@ -8,11 +9,7 @@ class TasksNotifier extends ChangeNotifier {
   final ITasksRepository tasksRepository;
   TasksNotifier({
     required this.tasksRepository,
-  }) {
-    getTasks();
-  }
-
-  TasksState state = TasksState.initial();
+  });
 
   List<Task> _tasks = [];
 
@@ -22,21 +19,17 @@ class TasksNotifier extends ChangeNotifier {
   List<Task> get completedTasks =>
       _tasks.where((task) => task.completed).toList();
 
-  Future<void> getTasks() async {
-    state = TasksState.loading();
-    notifyListeners();
+  Future<Either<DatabaseFailure, Unit>> getTasks() async {
     final result = await tasksRepository.readTasks();
-    result.fold(
+    return result.fold(
       (failure) {
         print(failure);
-        state = TasksState.error();
-        notifyListeners();
+        return left(failure);
       },
       (tasks) {
         _tasks = tasks;
         _sortTasks();
-        state = TasksState.ready();
-        notifyListeners();
+        return right(unit);
       },
     );
   }
@@ -52,6 +45,8 @@ class TasksNotifier extends ChangeNotifier {
     await tasksRepository.deleteTask(taskId: taskId);
     notifyListeners();
   }
+
+  //TODO complete task
 
   Future<void> updateTask({required Task newTaskInfo}) async {
     newTaskInfo = newTaskInfo.copyWith(modified: DateTime.now());

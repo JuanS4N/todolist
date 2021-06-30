@@ -14,13 +14,13 @@ class TasksListNotifier extends ChangeNotifier {
   Future<void> animatedTaskChange(int index, Task task,
       SliverAnimatedListState from, SliverAnimatedListState to) async {
     int _duration = 250;
+    await read(tasksNotifierProvider)
+        .updateTask(newTaskInfo: task.copyWith(completed: !task.completed));
     from.removeItem(
       index,
       (context, animation) => TaskTile(task: task, animation: animation),
       duration: Duration(milliseconds: _duration),
     );
-    await read(tasksNotifierProvider)
-        .updateTask(newTaskInfo: task.copyWith(completed: !task.completed));
     to.insertItem(0);
   }
 }

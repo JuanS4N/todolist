@@ -7,7 +7,7 @@ import 'todo.dart';
 class Task extends Todo {
   final DateTime? date;
   final String? description;
-  final List<Todo> subtasks;
+  final List<Todo> subtasks; //TODO use references to subtasks
 
   Task({
     String? id,

@@ -1,15 +1,13 @@
-import 'package:dartz/dartz.dart';
+import 'package:dartz/dartz.dart' hide Task;
 import 'package:hive/hive.dart';
-import 'package:todolist/src/features/todos/domain/entities/task.dart'
-    as TaskEntity;
+import 'package:todolist/src/features/todos/domain/entities/task.dart';
 import 'package:todolist/src/features/todos/domain/interface/i_tasks_repository.dart';
 
 import '../../domain/entities/database_failures/database_failure.dart';
 
 class HiveTasksRepository implements ITasksRepository {
   @override
-  Future<Either<DatabaseFailure, Unit>> createTask(
-          {required TaskEntity.Task task}) =>
+  Future<Either<DatabaseFailure, Unit>> createTask({required Task task}) =>
       _saveTask(task: task);
 
   @override
@@ -26,13 +24,13 @@ class HiveTasksRepository implements ITasksRepository {
   }
 
   @override
-  Future<Either<DatabaseFailure, List<TaskEntity.Task>>> readTasks() async {
+  Future<Either<DatabaseFailure, List<Task>>> readTasks() async {
     try {
       if (!Hive.isBoxOpen('tasks'))
         await Hive.openBox<Map<dynamic, dynamic>>('tasks');
       final tasks = Hive.box<Map<dynamic, dynamic>>('tasks')
           .values
-          .map((taskMap) => TaskEntity.Task.fromMap(taskMap))
+          .map((taskMap) => Task.fromMap(taskMap))
           .toList();
       return right(tasks);
     } catch (e) {
@@ -41,12 +39,10 @@ class HiveTasksRepository implements ITasksRepository {
   }
 
   @override
-  Future<Either<DatabaseFailure, Unit>> updateTask(
-          {required TaskEntity.Task task}) =>
+  Future<Either<DatabaseFailure, Unit>> updateTask({required Task task}) =>
       _saveTask(task: task);
 
-  Future<Either<DatabaseFailure, Unit>> _saveTask(
-      {required TaskEntity.Task task}) async {
+  Future<Either<DatabaseFailure, Unit>> _saveTask({required Task task}) async {
     try {
       if (!Hive.isBoxOpen('tasks'))
         await Hive.openBox<Map<dynamic, dynamic>>('tasks');
