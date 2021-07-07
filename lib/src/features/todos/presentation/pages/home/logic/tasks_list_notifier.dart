@@ -1,15 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:todolist/src/features/todos/domain/entities/task.dart';
+import 'package:todolist/src/features/todos/domain/entities/todo.dart';
 import 'package:todolist/src/features/todos/presentation/pages/home/widgets/task_tile.dart';
+import 'package:todolist/src/features/todos/domain/entities/task.dart';
 
 class TasksListNotifier extends ChangeNotifier {
-  final tasks = [
-    Task(title: 'Comprar zanahorias', date: DateTime(2020, 1)),
-    Task(title: 'Bañar a los perros', date: DateTime(2020, 2)),
-    Task(title: 'Lavar la ropa', date: DateTime(2020, 3)),
-    Task(title: 'Llamar a Jorge', date: DateTime(2020, 4)),
-    Task(title: 'Pagar servicios', completed: true, date: DateTime(2020, 5)),
-  ];
+  final tasks = List.generate(
+    10,
+    (index) => Task(
+      title: 'Task Title $index',
+      description: index % 2 == 0
+          ? '$index Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet turpis nec ante feugiat euismod.'
+          : null,
+      //date: DateTime.now(),
+      completed: index % 3 == 0,
+      subtasks: index % 4 == 0
+          ? [
+              Todo(title: 'SubTask $index'),
+              Todo(title: 'SubTask $index'),
+              Todo(title: 'SubTask $index'),
+              Todo(title: 'SubTask $index'),
+            ]
+          : [],
+    ),
+  );
 
   List<Task> get uncompletedTasks =>
       tasks.where((task) => !task.completed).toList();

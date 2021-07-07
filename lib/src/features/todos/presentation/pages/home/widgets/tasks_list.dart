@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todolist/src/features/todos/domain/entities/task.dart';
-import 'package:todolist/src/features/todos/presentation/pages/home/logic/tasks_list_notifier.dart';
 import 'package:todolist/src/features/todos/presentation/pages/home/logic/tasks_providers.dart';
-import 'package:todolist/src/features/todos/presentation/pages/home/widgets/task_tile.dart';
 
 import 'animated_tasks_list.dart';
 
@@ -29,8 +26,10 @@ class _TasksListState extends State<TasksList> {
           slivers: [
             SliverToBoxAdapter(
               child: Text(
-                "List title",
-                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a orci tortor.',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.headline4
               ),
             ),
             AnimatedTasksList(
@@ -44,25 +43,6 @@ class _TasksListState extends State<TasksList> {
                     _completedKey.currentState!,
                   );
                 }),
-            // SliverAnimatedList(
-            //   key: _uncompletedKey,
-            //   initialItemCount: read.uncompletedTasks.length,
-            //   itemBuilder: (context, index, animation) {
-            //     Task task = read.uncompletedTasks[index];
-            //     return TaskTile(
-            //       task: task,
-            //       animation: animation,
-            //       onChanged: () {
-            //         read.animatedTaskChange(
-            //           index,
-            //           task,
-            //           _uncompletedKey.currentState!,
-            //           _completedKey.currentState!,
-            //         );
-            //       },
-            //     );
-            //   },
-            // ),
             SliverToBoxAdapter(
               child: Text(
                 "Completed",

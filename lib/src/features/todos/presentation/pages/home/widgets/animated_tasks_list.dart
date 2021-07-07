@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:todolist/src/features/todos/domain/entities/task.dart';
-import 'package:todolist/src/features/todos/presentation/pages/home/logic/tasks_list_notifier.dart';
+import 'package:todolist/src/features/task/presentation/pages/task_page.dart';
 import 'package:todolist/src/features/todos/presentation/pages/home/widgets/task_tile.dart';
+import 'package:todolist/src/features/todos/domain/entities/task.dart';
 
 class AnimatedTasksList extends StatelessWidget {
   const AnimatedTasksList({
@@ -24,11 +24,18 @@ class AnimatedTasksList extends StatelessWidget {
       itemBuilder: (context, index, animation) {
         Task task = tasks[index];
         return TaskTile(
-            task: task,
-            animation: animation,
-            onChanged: () {
-              onChanged(task, index);
-            });
+          task: task,
+          animation: animation,
+          onIconPressed: () {
+            onChanged(task, index);
+          },
+          onTaskPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => TaskPage(task: task)),
+            );
+          },
+        );
       },
     );
   }
