@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todolist/src/features/todos/presentation/pages/home/logic/tasks_providers.dart';
 
 import '../../../../application/tasks_provider.dart';
 import '../logic/tasks_providers.dart';
@@ -26,16 +27,11 @@ class _TasksListState extends State<TasksList> {
         child: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
-              child: Consumer(
-                builder: (context, watch, child) {
-                  // final title = watch(tasksListProvider).title;
-                  // return Text(
-                  //   title,
-                  //   style:
-                  //       TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-                  // );
-                  return Text('Uncompleted');
-                },
+              child: Text(
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a orci tortor.',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.headline4
               ),
             ),
             AnimatedTasksList(
