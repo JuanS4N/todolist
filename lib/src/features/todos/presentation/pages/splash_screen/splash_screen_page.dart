@@ -32,37 +32,10 @@ class SplashScreenPage extends StatelessWidget {
         ),
       );
     });
-    return /* ProviderListener<TasksNotifier>(
-      provider: tasksNotifierProvider,
-      onChange: (context, notifier) {
-        notifier.state.maybeWhen(
-            ready: () => Navigator.of(context).pushReplacement(
-                  PageRouteBuilder(
-                    pageBuilder: (BuildContext context,
-                            Animation<double> animation,
-                            Animation<double> secondaryAnimation) =>
-                        HomePage(),
-                    transitionDuration: const Duration(seconds: 1),
-                    transitionsBuilder:
-                        (context, animation, secondaryAnimation, child) {
-                      final curvedAnimation = CurvedAnimation(
-                          parent: animation, curve: Curves.easeInOut);
-                      return FadeTransition(
-                        opacity: Tween<double>(begin: 0.0, end: 1.0)
-                            .animate(curvedAnimation),
-                        child: child,
-                      );
-                    },
-                  ),
-                ),
-            orElse: () {});
-      },
-      child: */
-        Scaffold(
+    return Scaffold(
       body: Center(
         child: const CircularProgressIndicator(),
       ),
-      // ),
     );
   }
 }
