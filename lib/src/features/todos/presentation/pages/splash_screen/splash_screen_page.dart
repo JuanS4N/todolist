@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todolist/src/core/home/home_page.dart';
 
-import '../../../../../presentation/core/home/home_page.dart';
 import '../../../application/tasks_provider.dart';
 
 class SplashScreenPage extends StatelessWidget {
