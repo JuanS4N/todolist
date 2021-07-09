@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:todolist/src/core/task_theme_data.dart';
-import 'package:todolist/src/features/task/presentation/pages/widgets/sub_task_tile.dart';
-import 'package:todolist/src/features/todos/domain/entities/task.dart';
 
+import '../../../../core/task_theme_data.dart';
+import '../../../todos/domain/entities/task.dart';
 import 'widgets/icon_prefix_widget.dart';
+import 'widgets/sub_task_tile.dart';
 
 class TaskPage extends StatefulWidget {
   const TaskPage({Key? key, required this.task}) : super(key: key);

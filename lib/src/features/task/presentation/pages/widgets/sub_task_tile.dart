@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:todolist/src/core/task_theme_data.dart';
-import 'package:todolist/src/features/todos/domain/entities/task.dart';
+
+import '../../../../../core/task_theme_data.dart';
+import '../../../../todos/domain/entities/task.dart';
 
 class SubTaskTile extends StatefulWidget {
   const SubTaskTile({

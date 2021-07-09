@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:todolist/src/features/task/presentation/pages/task_page.dart';
-import 'package:todolist/src/features/todos/presentation/pages/home/widgets/task_tile.dart';
-import 'package:todolist/src/features/todos/domain/entities/task.dart';
+import '../../../../../task/presentation/pages/task_page.dart';
+import 'task_tile.dart';
+import '../../../../domain/entities/task.dart';
 
 class AnimatedTasksList extends StatelessWidget {
   const AnimatedTasksList({
