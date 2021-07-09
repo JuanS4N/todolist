@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:todolist/src/features/List/application/list_providers.dart';
-import 'package:todolist/src/features/List/domain/entities/list_of_task.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todolist/src/features/todos/presentation/pages/home/logic/tasks_providers.dart';
+
+import '../../application/list_providers.dart';
+import '../../domain/entities/list_of_task.dart';
 
 class NormalElement extends StatelessWidget {
   final TaskList element;
@@ -25,7 +25,7 @@ class NormalElement extends StatelessWidget {
           ),
           onTap: () {
             context.read(listProvider).selectList(element);
-            context.read(tasksListProvider).setTask(element);
+            // context.read(tasksListProvider).setTask(element);
             Navigator.pop(context);
           },
         ));

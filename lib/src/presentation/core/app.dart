@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todolist/src/presentation/core/home/home_page.dart';
+import '../../features/todos/presentation/pages/splash_screen/splash_screen_page.dart';
 
 class MyApp extends StatelessWidget {
   @override
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
                   fontSize: 16,
                   color: Colors.black,
                   fontWeight: FontWeight.w500))),
-      home: HomePage(),
+      home: SplashScreenPage(),
     );
   }
 }

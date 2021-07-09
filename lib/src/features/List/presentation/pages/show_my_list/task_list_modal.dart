@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todolist/src/features/List/application/list_providers.dart';
-import 'package:todolist/src/features/List/presentation/widgets/create_list_cta.dart';
-import 'package:todolist/src/features/List/presentation/widgets/items_list_viewer.dart';
+import '../../../application/list_providers.dart';
+import '../../widgets/create_list_cta.dart';
+import '../../widgets/items_list_viewer.dart';
 
 void listViewBottomSheet(context) {
   showModalBottomSheet(
