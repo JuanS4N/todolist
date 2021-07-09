@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:todolist/src/features/List/domain/entities/list_of_task.dart';
-import 'package:todolist/src/features/List/presentation/widgets/highlighted_element.dart';
 
+import '../../domain/entities/list_of_task.dart';
+import 'highlighted_element.dart';
 import 'normal_element.dart';
 
 class ListElement extends StatelessWidget {

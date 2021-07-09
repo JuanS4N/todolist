@@ -28,12 +28,13 @@ class _TasksListState extends State<TasksList> {
             SliverToBoxAdapter(
               child: Consumer(
                 builder: (context, watch, child) {
-                  final title = watch(tasksListProvider).title;
-                  return Text(
-                    title,
-                    style:
-                        TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-                  );
+                  // final title = watch(tasksListProvider).title;
+                  // return Text(
+                  //   title,
+                  //   style:
+                  //       TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                  // );
+                  return Text('Uncompleted');
                 },
               ),
             ),

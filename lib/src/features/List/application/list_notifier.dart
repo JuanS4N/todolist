@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:todolist/src/features/List/domain/entities/list_of_task.dart';
+import '../domain/entities/list_of_task.dart';
 
 class ListNotifier extends ChangeNotifier {
   List<TaskList> _myList = [
