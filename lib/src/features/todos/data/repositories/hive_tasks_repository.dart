@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart' hide Task;
 import 'package:hive/hive.dart';
-import '../../domain/entities/task.dart';
-import '../../domain/interface/i_tasks_repository.dart';
 
 import '../../domain/entities/database_failures/database_failure.dart';
+import '../../domain/entities/task.dart';
+import '../../domain/interface/i_tasks_repository.dart';
 
 class HiveTasksRepository implements ITasksRepository {
   @override

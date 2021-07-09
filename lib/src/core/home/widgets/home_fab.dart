@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../../../features/todos/application/tasks_provider.dart';
-import '../../../../features/todos/domain/entities/task.dart';
+import 'package:todolist/src/features/todos/application/tasks_provider.dart';
+import 'package:todolist/src/features/todos/domain/entities/task.dart';
 
 class HomeFAB extends ConsumerWidget {
   const HomeFAB({
