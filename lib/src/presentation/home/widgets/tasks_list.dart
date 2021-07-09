@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todolist/src/features/tasks/application/tasks_provider.dart';
+import 'package:todolist/src/presentation/home/logic/tasks_providers.dart';
 
-import '../../../../application/tasks_provider.dart';
-import '../logic/tasks_providers.dart';
 import 'animated_tasks_list.dart';
 
 class TasksList extends StatefulWidget {
@@ -27,11 +27,10 @@ class _TasksListState extends State<TasksList> {
           slivers: [
             SliverToBoxAdapter(
               child: Text(
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a orci tortor.',
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.headline4
-              ),
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a orci tortor.',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.headline4),
             ),
             AnimatedTasksList(
                 myKey: _uncompletedKey,

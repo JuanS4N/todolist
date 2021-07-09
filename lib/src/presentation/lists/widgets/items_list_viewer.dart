@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:todolist/src/features/List/domain/entities/list_of_task.dart';
 
-import '../../domain/entities/list_of_task.dart';
 import 'list_element.dart';
 
 class ItemsListView extends StatelessWidget {

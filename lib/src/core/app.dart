@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todolist/src/features/todos/presentation/pages/splash_screen/splash_screen_page.dart';
+import 'package:todolist/src/presentation/splash/splash_screen_page.dart';
 
 import 'task_theme_data.dart';
 
