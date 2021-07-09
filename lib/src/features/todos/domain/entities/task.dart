@@ -17,7 +17,6 @@ class Task extends Todo {
     this.subtasks = const <Todo>[],
   }) : super(title: title, completed: completed);
 
-
   Task copyWith({
     String? title,
     bool? completed,
@@ -48,7 +47,9 @@ class Task extends Todo {
     return Task(
       title: map['title'],
       completed: map['completed'],
-      date: map['date'] != null ? DateTime.fromMillisecondsSinceEpoch(map['date']) : null,
+      date: map['date'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(map['date'])
+          : null,
       description: map['description'],
       subtasks: List<Todo>.from(map['subtasks']?.map((x) => Todo.fromMap(x))),
     );
@@ -59,20 +60,26 @@ class Task extends Todo {
   factory Task.fromJson(String source) => Task.fromMap(json.decode(source));
 
   @override
-  String toString() => 'MainTodo(title: ${super.title}, completed: ${super.completed} date: $date, description: $description, subtasks: $subtasks)';
+  String toString() =>
+      'MainTodo(title: ${super.title}, completed: ${super.completed} date: $date, description: $description, subtasks: $subtasks)';
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
+
     return other is Task &&
-      other.title == super.title &&
-      other.completed == super.completed &&
-      other.date == date &&
-      other.description == description &&
-      listEquals(other.subtasks, subtasks);
+        other.title == super.title &&
+        other.completed == super.completed &&
+        other.date == date &&
+        other.description == description &&
+        listEquals(other.subtasks, subtasks);
   }
 
   @override
-  int get hashCode => super.title.hashCode ^ super.completed.hashCode ^ date.hashCode ^ description.hashCode ^ subtasks.hashCode;
+  int get hashCode =>
+      super.title.hashCode ^
+      super.completed.hashCode ^
+      date.hashCode ^
+      description.hashCode ^
+      subtasks.hashCode;
 }

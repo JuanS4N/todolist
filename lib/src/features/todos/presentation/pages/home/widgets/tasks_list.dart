@@ -28,9 +28,15 @@ class _TasksListState extends State<TasksList> {
         child: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
-              child: Text(
-                "List title",
-                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+              child: Consumer(
+                builder: (context, watch, child) {
+                  final title = watch(tasksListProvider).title;
+                  return Text(
+                    title,
+                    style:
+                        TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                  );
+                },
               ),
             ),
             AnimatedTasksList(
