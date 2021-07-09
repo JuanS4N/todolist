@@ -1,5 +1,8 @@
-class ListOfTask {
-  final String listName;
-  final bool isActive;
-  const ListOfTask(this.listName, this.isActive);
+import 'package:todolist/src/features/todos/domain/entities/task.dart';
+
+class TaskList {
+  int listId;
+  String listName;
+  bool isActive;
+  TaskList(this.listId, this.listName, this.isActive);
 }
