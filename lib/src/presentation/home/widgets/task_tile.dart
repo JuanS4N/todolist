@@ -42,7 +42,7 @@ class TaskTile extends StatelessWidget {
     return Container(
       width: size.width * 0.9,
       margin: EdgeInsets.only(
-          left: !task.subtasks.isNotEmpty && !task.completed
+          left: task.parentTask != null && !task.completed
               ? size.width * 0.065
               : 0),
       child: InkWell(
