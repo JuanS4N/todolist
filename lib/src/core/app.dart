@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todolist/src/features/todos/presentation/pages/home/home_page.dart';
+import 'package:todolist/src/features/todos/presentation/pages/splash_screen/splash_screen_page.dart';
 
 import 'task_theme_data.dart';
 
@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
       theme: lightTheme,
       darkTheme: dartkTheme,
       themeMode: ThemeMode.system,
-      home: HomePage(),
+      home: SplashScreenPage(),
     );
   }
 }
