@@ -46,7 +46,7 @@ class _TaskPageState extends State<TaskPage> {
                 children: [
                   Expanded(
                     child: Text(
-                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vitae ligula consequat, maximus diam non, finibus massa. Aenean sit amet enim eros. Etiam ligula purus, dictum quis nunc nec, dignissim rhoncus velit. Etiam id risus a turpis vestibulum ultrices. Nunc accumsan diam in euismod aliquet. Nulla porttitor velit vel nisl porttitor, sit amet elementum mi consequat. Nulla accumsan justo in nulla lacinia finibus. Pellentesque ultricies fermentum ligula sit amet viverra.',
+                      'List name',
                       style: Theme.of(context)
                           .textTheme
                           .bodyText2
