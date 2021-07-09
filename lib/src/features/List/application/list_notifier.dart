@@ -27,7 +27,6 @@ class ListNotifier extends ChangeNotifier {
         element.isActive = true;
       }
     });
-
     notifyListeners();
   }
 }

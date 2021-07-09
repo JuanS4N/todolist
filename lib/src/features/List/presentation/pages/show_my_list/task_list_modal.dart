@@ -4,13 +4,11 @@ import 'package:todolist/src/features/List/application/list_providers.dart';
 import 'package:todolist/src/features/List/presentation/widgets/create_list_cta.dart';
 import 'package:todolist/src/features/List/presentation/widgets/items_list_viewer.dart';
 
-var listTextStyle = const TextStyle(
-    fontSize: 16, color: Colors.black, fontWeight: FontWeight.w500);
-
 void listViewBottomSheet(context) {
   showModalBottomSheet(
       context: context,
-      isScrollControlled: true,
+      isScrollControlled:
+          true, // TODO -> We need to stop when al task are displyed.
       builder: (BuildContext bc) {
         return DraggableScrollableSheet(
           expand: false,
