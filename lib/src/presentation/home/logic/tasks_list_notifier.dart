@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todolist/src/features/tasks/application/tasks_provider.dart';
-import 'package:todolist/src/features/tasks/domain/entities/task.dart';
-import 'package:todolist/src/presentation/home/widgets/task_tile.dart';
+
+import '../../../features/tasks/application/tasks_provider.dart';
+import '../../../features/tasks/domain/entities/task.dart';
+import '../widgets/task_tile.dart';
 
 class TasksListNotifier extends ChangeNotifier {
   final Reader read;

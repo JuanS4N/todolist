@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:todolist/src/core/task_theme_data.dart';
-import 'package:todolist/src/features/tasks/domain/entities/task.dart';
+
+import '../../../core/task_theme_data.dart';
+import '../../../features/tasks/domain/entities/task.dart';
+import '../../widgets/date_container.dart';
 
 class TaskTile extends StatelessWidget {
   const TaskTile({
@@ -26,27 +28,32 @@ class TaskTile extends StatelessWidget {
         ? SizeTransition(
             sizeFactor: animation,
             axisAlignment: 1,
-            child: _build(size, context),
+            child: _build(
+              size,
+              context,
+              isSubtask: task.parentTask != null, //&& !task.completed,
+            ),
           )
         : FadeTransition(
             opacity: animation,
             child: SizeTransition(
               sizeFactor: animation,
               axisAlignment: -1,
-              child: _build(size, context),
+              child: _build(
+                size,
+                context,
+                isSubtask: false,
+              ),
             ),
           );
   }
 
-  Widget _build(Size size, BuildContext context) {
-    return Container(
-      width: size.width * 0.9,
-      margin: EdgeInsets.only(
-          left: task.parentTask != null && !task.completed
-              ? size.width * 0.065
-              : 0),
-      child: InkWell(
-        onTap: onTaskPressed,
+  Widget _build(Size size, BuildContext context, {required bool isSubtask}) {
+    return InkWell(
+      onTap: onTaskPressed,
+      child: Container(
+        padding: isSubtask ? EdgeInsets.only(left: size.width * 0.065) : null,
+        margin: EdgeInsets.symmetric(horizontal: size.width * 0.01),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -60,30 +67,27 @@ class TaskTile extends StatelessWidget {
               color: task.completed ? activeColor : null,
               onPressed: onIconPressed,
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  task.title,
-                  maxLines: 5,
-                  style: Theme.of(context).textTheme.subtitle1,
-                ),
-                Visibility(
-                  visible: task.description != null,
-                  child: _descriptionBuilder(size, context),
-                ),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 7.5, vertical: 5.0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20.0),
-                    border: Border.all(color: unactiveColor),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    task.title,
+                    maxLines: 5,
+                    style: Theme.of(context).textTheme.subtitle1,
                   ),
-                  child: Text(
-                    DateTime.now().toString(),
-                    style: Theme.of(context).textTheme.caption,
+                  Visibility(
+                    visible: task.description != null,
+                    child: _descriptionBuilder(size, context),
                   ),
-                ),
-              ],
+                  DateContainer(
+                    date: DateTime.now(),
+                    onPressed: (DateTime date) {
+                      print(date.toString());
+                    },
+                  ),
+                ],
+              ),
             ),
           ],
         ),

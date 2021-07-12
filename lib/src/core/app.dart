@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todolist/src/presentation/splash/splash_screen_page.dart';
 
+import '../presentation/splash/splash_screen_page.dart';
 import 'task_theme_data.dart';
 
 class MyApp extends StatelessWidget {

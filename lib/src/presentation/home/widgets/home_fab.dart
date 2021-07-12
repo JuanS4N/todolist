@@ -1,7 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todolist/src/features/tasks/application/tasks_provider.dart';
-import 'package:todolist/src/features/tasks/domain/entities/task.dart';
+import '../../../features/tasks/application/tasks_provider.dart';
+import '../../../features/tasks/domain/entities/task.dart';
 
 class HomeFAB extends ConsumerWidget {
   const HomeFAB({
@@ -12,6 +14,7 @@ class HomeFAB extends ConsumerWidget {
   Widget build(BuildContext context, ScopedReader watch) {
     return FloatingActionButton(
       onPressed: () async {
+        log('+');
         Task parentTask = Task(
           title: 'Main task with no subtasks',
           modified: DateTime.now(),
@@ -29,7 +32,7 @@ class HomeFAB extends ConsumerWidget {
         // await context.read(tasksNotifierProvider).createTask(task: subtask3);
         // await context.read(tasksNotifierProvider).createTask(task: subtask2);
         // await context.read(tasksNotifierProvider).createTask(task: subtask1);
-        await context.read(tasksNotifierProvider).createTask(task: parentTask);
+        await context.read(tasksNotifierProvider).createTask(task: parentTask).then((value) => log('exit'));
       },
       child: Icon(Icons.add),
       elevation: 0.0,
