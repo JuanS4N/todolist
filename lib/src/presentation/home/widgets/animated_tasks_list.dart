@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
 import '../../../features/tasks/domain/entities/task.dart';
-import '../../task_details/task_page.dart';
+import '../../task_details/pages/task_page.dart';
 import 'task_tile.dart';
 
 class AnimatedTasksList extends StatelessWidget {
