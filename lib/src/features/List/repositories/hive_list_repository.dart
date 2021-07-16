@@ -1,30 +1,46 @@
-import 'package:todolist/src/features/tasks/domain/entities/task.dart';
-import 'package:todolist/src/features/tasks/domain/entities/database_failures/database_failure.dart';
 import 'package:dartz/dartz.dart';
-import 'package:todolist/src/features/tasks/domain/interface/i_tasks_repository.dart';
+import 'package:hive/hive.dart';
+import 'package:todolist/src/features/List/domain/contracts/i_repositories.dart';
+import 'package:todolist/src/features/tasks/domain/entities/database_failures/database_failure.dart';
+import 'package:todolist/src/features/List/domain/entities/list_of_task.dart';
 
-class HiveListRepository extends ITasksRepository {
+import 'list_hive_dto.dart';
+
+class HiveListRepository extends IListRepository {
+  static final String BOX_NAME = "list";
+
   @override
-  Future<Either<DatabaseFailure, Unit>> createTask({required Task task}) {
-    // TODO: implement createTask
-    throw UnimplementedError();
+  Future<Either<DatabaseFailure, Unit>> createList(
+      {required TaskList list}) async {
+    try {
+      checkBox(BOX_NAME);
+      await Hive.box(BOX_NAME).add(HiveListObject.fromTaskList(list));
+
+      return right(unit);
+    } catch (exception) {
+      return left(const DatabaseFailure.serverError());
+    }
   }
 
   @override
-  Future<Either<DatabaseFailure, Unit>> deleteTask({required String taskId}) {
-    // TODO: implement deleteTask
-    throw UnimplementedError();
+  Future<Either<DatabaseFailure, List<TaskList>>> readAllList() async {
+    try {
+      checkBox(BOX_NAME);
+
+      final List<TaskList> userList = Hive.box(BOX_NAME)
+          .values
+          .map((hiveListObject) => TaskList.fromHiveDTO(hiveListObject))
+          .toList();
+
+      return right(userList);
+    } catch (exception) {
+      return left(const DatabaseFailure.serverError());
+    }
   }
 
-  @override
-  Future<Either<DatabaseFailure, List<Task>>> readTasks() {
-    // TODO: implement readTasks
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<Either<DatabaseFailure, Unit>> updateTask({required Task task}) {
-    // TODO: implement updateTask
-    throw UnimplementedError();
+  void checkBox(String boxName) async {
+    if (!Hive.isBoxOpen(boxName)) {
+      await Hive.openBox<HiveListObject>(boxName);
+    }
   }
 }
