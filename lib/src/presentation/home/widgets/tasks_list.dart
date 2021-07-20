@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todolist/src/core/utils.dart';
+import 'package:todolist/src/features/tasks/domain/entities/task.dart';
+import 'package:todolist/src/presentation/home/widgets/completed_tasks_list.dart';
 
 import '../../../features/tasks/application/tasks_provider.dart';
 import '../logic/tasks_providers.dart';
-import 'animated_tasks_list.dart';
+import 'uncompleted_tasks_list.dart';
 
 class TasksList extends StatefulWidget {
   TasksList({Key? key}) : super(key: key);
@@ -14,55 +17,97 @@ class TasksList extends StatefulWidget {
 
 class _TasksListState extends State<TasksList> {
   final _uncompletedKey = GlobalKey<SliverAnimatedListState>();
-  final _completedKey = GlobalKey<SliverAnimatedListState>();
+  // final _completedKey = GlobalKey<SliverAnimatedListState>();
+  final _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(builder: (contex, watch, child) {
-      final read = context.read(tasksListProvider);
-      final tasksNotifier = watch(tasksNotifierProvider);
+    return Consumer(
+      builder: (contex, watch, child) {
+        final read = context.read(tasksListProvider);
+        final tasksNotifier = watch(tasksNotifierProvider);
 
-      return SafeArea(
-        child: CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(
-              child: Text(
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a orci tortor.',
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context).textTheme.headline4),
-            ),
-            AnimatedTasksList(
+        return SafeArea(
+          child: CustomScrollView(
+            controller: _scrollController,
+            slivers: [
+              SliverToBoxAdapter(
+                child: Container(
+                  margin: EdgeInsets.only(
+                    left: contextSize(context).width * 0.1,
+                    right: contextSize(context).width * 0.1,
+                    bottom: 15.0,
+                  ),
+                  child: Text('List title name',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.headline4),
+                ),
+              ),
+              UncompletedTasksList(
                 myKey: _uncompletedKey,
                 tasks: tasksNotifier.uncompletedTasks,
-                onChanged: (task, index) {
-                  read.animatedTaskChange(
-                    index,
-                    task,
-                    _uncompletedKey.currentState!,
-                    _completedKey.currentState!,
-                  );
-                }),
-            SliverToBoxAdapter(
-              child: Text(
-                "Completed",
-                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.normal),
+                onChanged: (task, index) => read.completeTask(
+                  index,
+                  task,
+                  _uncompletedKey.currentState!,
+                  // _completedKey.currentState!,
+                ),
               ),
-            ),
-            AnimatedTasksList(
-                myKey: _completedKey,
-                tasks: tasksNotifier.completedTasks,
-                onChanged: (task, index) {
-                  read.animatedTaskChange(
-                    index,
-                    task,
-                    _completedKey.currentState!,
-                    _uncompletedKey.currentState!,
-                  );
-                }),
-          ],
+              SliverToBoxAdapter(
+                child: CompletedTasksList(
+                  completedTasks: tasksNotifier.completedTasks,
+                  onChanged: (task, index) => read.uncompleteTask(
+                      index, task, _uncompletedKey.currentState!),
+                  onExpansionChanged: (expanded) {
+                    if (expanded)
+                      Future.delayed(Duration(milliseconds: 100), () {
+                        _scrollController.animateTo(
+                            _scrollController.position.maxScrollExtent,
+                            // contextSize(context).height * 0.2,
+                            duration: Duration(milliseconds: 300),
+                            curve: Curves.easeOut);
+                      });
+                  },
+                ),
+                // child: AnimatedSwitcher(
+                //   duration: Duration(milliseconds: 300),
+                //   child: tasksNotifier.completedTasks.isEmpty
+                //       ? Container()
+                //       : ExpansionTile(
+                //           title: Text(
+                //             "Completed",
+                //             style: TextStyle(
+                //                 fontSize: 20.0, fontWeight: FontWeight.normal),
+                //           ),
+                //           onExpansionChanged: (expanded) {
+                //   if (expanded)
+                //     _scrollController.animateTo(
+                //         contextSize(context).height * 0.2,
+                //         duration: Duration(milliseconds: 300),
+                //         curve: Curves.easeOut);
+                // },
+                //           children: _children(tasksNotifier.completedTasks),
+                //         ),
+                // ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  List<Widget> _children(List<Task> tasks) {
+    List<Widget> result = [];
+    for (int i = 0; i < tasks.length; i++) {
+      final task = tasks[i];
+      result.add(
+        ListTile(
+          title: Text(task.title),
         ),
       );
-    });
+    }
+    return result;
   }
 }

@@ -4,8 +4,8 @@ import '../../../core/task_theme_data.dart';
 import '../../../features/tasks/domain/entities/task.dart';
 import '../../widgets/date_container.dart';
 
-class TaskTile extends StatelessWidget {
-  const TaskTile({
+class UncompletedTaskTile extends StatelessWidget {
+  const UncompletedTaskTile({
     Key? key,
     required this.task,
     required this.animation,
@@ -53,7 +53,7 @@ class TaskTile extends StatelessWidget {
       onTap: onTaskPressed,
       child: Container(
         padding: isSubtask ? EdgeInsets.only(left: size.width * 0.065) : null,
-        margin: EdgeInsets.symmetric(horizontal: size.width * 0.01),
+        margin: EdgeInsets.symmetric(horizontal: size.width * 0.015, vertical: 7.5),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -64,7 +64,6 @@ class TaskTile extends StatelessWidget {
                 task.completed ? Icons.check : Icons.circle_outlined,
               ),
               visualDensity: VisualDensity.compact,
-              color: task.completed ? activeColor : null,
               onPressed: onIconPressed,
             ),
             Expanded(
