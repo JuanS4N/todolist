@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import '../../../features/tasks/domain/entities/task.dart';
 import '../../task_details/pages/task_page.dart';
-import 'task_tile.dart';
+import 'uncompleted_task_tile.dart';
 
-class AnimatedTasksList extends StatelessWidget {
-  const AnimatedTasksList({
+class UncompletedTasksList extends StatelessWidget {
+  const UncompletedTasksList({
     Key? key,
     required this.tasks,
     required this.onChanged,
@@ -23,17 +23,18 @@ class AnimatedTasksList extends StatelessWidget {
       initialItemCount: tasks.length,
       itemBuilder: (context, index, animation) {
         Task task = tasks[index];
-        return TaskTile(
+        return UncompletedTaskTile(
           task: task,
           animation: animation,
           onIconPressed: () {
             onChanged(task, index);
           },
-          onTaskPressed: () {
-            Navigator.push(
+          onTaskPressed: () async{
+            final result = await Navigator.push<Task>(
               context,
               MaterialPageRoute(builder: (_) => TaskPage(task: task)),
             );
+            if(result != null) print(result);
           },
         );
       },

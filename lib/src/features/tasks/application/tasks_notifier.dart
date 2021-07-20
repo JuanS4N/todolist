@@ -85,7 +85,7 @@ class TasksNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  Task _getTaskById(String id) =>
+  Task getTaskById(String id) =>
       _tasks.firstWhere((listTask) => listTask.id == id);
 
   Future<void> _removeSubtaskReference(
@@ -95,19 +95,19 @@ class TasksNotifier extends ChangeNotifier {
     await updateTask(newTaskInfo: parentTask.copyWith(subtasks: newSubtasks));
   }
 
-  Future<void> _completeSubtasks({required List<String> subtasksIds}) async {
-    final List<Task> subtasks = getSubtasks(subtasksIds: subtasksIds);
-    for (final Task task in subtasks) {
-      if (!task.completed) await toggleTaskCompleted(task: task);
-    }
-  }
+  // Future<void> _completeSubtasks({required List<String> subtasksIds}) async {
+  //   final List<Task> subtasks = getSubtasks(subtasksIds: subtasksIds);
+  //   for (final Task task in subtasks) {
+  //     if (!task.completed) await toggleTaskCompleted(task: task);
+  //   }
+  // }
 
   //TODO complete task
   Future<void> toggleTaskCompleted({required Task task}) async {
     //TODO call animation method for automatic completion of subtasks
     bool removeParent = false;
     if (task.completed && task.parentTask != null) {
-      final parentTask = _getTaskById(task.parentTask!);
+      final parentTask = getTaskById(task.parentTask!);
       if (parentTask.completed) {
         await _removeSubtaskReference(
             parentTask: parentTask, subtaskId: task.id);
@@ -120,9 +120,9 @@ class TasksNotifier extends ChangeNotifier {
       modified: DateTime.now(),
     );
     await updateTask(newTaskInfo: newTaskInfo);
-    if (!task.completed && task.subtasks.isNotEmpty) {
-      await _completeSubtasks(subtasksIds: task.subtasks);
-    }
+    // if (!task.completed && task.subtasks.isNotEmpty) {
+    //   await _completeSubtasks(subtasksIds: task.subtasks);
+    // }
   }
 
   Future<void> updateTask({required Task newTaskInfo}) async {
