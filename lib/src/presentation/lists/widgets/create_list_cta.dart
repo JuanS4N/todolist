@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todolist/src/presentation/create_list/create_list.dart';
 
 class CreateListCTA extends StatelessWidget {
   const CreateListCTA({Key? key}) : super(key: key);
@@ -9,7 +10,10 @@ class CreateListCTA extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (_) => CreateListView()));
+      },
       child: Container(
         margin: EdgeInsets.all(20),
         child: Row(
