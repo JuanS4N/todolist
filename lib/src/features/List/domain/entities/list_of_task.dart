@@ -6,12 +6,6 @@ part 'list_of_task.freezed.dart';
 
 @freezed
 class TaskList with _$TaskList {
-  /*
-  int listId;
-  String listName;
-  bool isActive;
-  */
-
   factory TaskList(
       {required int listId,
       required String listName,
@@ -27,17 +21,4 @@ class TaskList with _$TaskList {
         listName: hiveListObject.listName,
         isActive: hiveListObject.isActive);
   }
-
-  /*
-  TaskList(this.listId, this.listName, this.isActive);
-
-  factory TaskList.fromHiveDTO(HiveListObject hiveListObject) {
-    return TaskList(
-        hiveListObject.key, hiveListObject.listName, hiveListObject.isActive);
-  }
-
-  factory TaskList.namedList(String listName) {
-    return TaskList(0, listName, false);
-  }
-  */
 }

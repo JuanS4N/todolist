@@ -35,7 +35,7 @@ class CreateListCTA extends StatelessWidget {
       child: Text(ctaText,
           style: Theme.of(context)
               .textTheme
-              .bodyText2), // TODO -> We need to use the app theme, this is just provisonal.
+              .bodyText1), // TODO -> We need to use the app theme, this is just provisonal.
     );
   }
 }

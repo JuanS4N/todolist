@@ -31,12 +31,8 @@ class CreateListNotifier extends ChangeNotifier {
     return false;
   }
 
-  void createList() async {
-    print("Lets create it!");
+  Future createList() async {
     await repository.createList(list: TaskList.namedList(_listName));
-
-    print("Lets check...");
-    await repository.readAllList();
   }
 }
 
@@ -58,16 +54,6 @@ class ListNotifier extends ChangeNotifier {
     return _taskLists;
   }
 
-  Future<List<TaskList>> get taskList {
-    return this
-        .repository
-        .readAllList()
-        .then((result) => result.fold((failure) {
-              print("it crash !" + failure.toString());
-              return new List.empty();
-            }, (r) => r));
-  }
-
   void selectList(TaskList taskList) async {
     await repository.updateList(list: taskList.copyWith(isActive: true));
 
@@ -76,6 +62,7 @@ class ListNotifier extends ChangeNotifier {
         await repository.updateList(list: element.copyWith(isActive: false));
       }
     });
-    notifyListeners();
+
+    await fetchTaskList();
   }
 }

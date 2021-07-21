@@ -23,7 +23,7 @@ class HighlightedElement extends StatelessWidget {
             element.listName,
             style: Theme.of(context)
                 .textTheme
-                .bodyText2!
+                .bodyText1!
                 .copyWith(color: Colors.indigoAccent.shade700),
           ),
           onTap: () => Navigator.pop(context),
