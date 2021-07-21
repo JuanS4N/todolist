@@ -1,33 +1,68 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:todolist/src/features/List/domain/contracts/i_repositories.dart';
 
 import '../domain/entities/list_of_task.dart';
 
-class ListNotifier extends ChangeNotifier {
-  List<TaskList> _myList = [
-    TaskList(1, 'Oh', false),
-    TaskList(2, 'My', true),
-    TaskList(3, 'Gosh', false),
-    TaskList(4, 'It Works!', false),
-  ];
+class CreateListNotifier extends ChangeNotifier {
+  final IListRepository repository;
 
-  get myLisy => _myList;
+  CreateListNotifier({required this.repository});
 
-  void setList(listParam) {
-    this._myList = listParam;
+  String _listName = "";
+  bool isNamedCorrectly = false;
+
+  set listName(String value) {
+    this._listName = value;
+    isNamedCorrectly = couldCreateList();
     notifyListeners();
   }
 
-  void selectList(TaskList task) {
-    _myList.forEach((element) {
-      if (element.isActive) {
-        element.isActive = false;
-      }
+  void cleanState() {
+    this._listName = "";
+    this.isNamedCorrectly = false;
+  }
 
-      if (element.listId == task.listId) {
-        element.isActive = true;
+  bool couldCreateList() {
+    if (_listName.length > 0) {
+      return true;
+    }
+    return false;
+  }
+
+  Future createList() async {
+    await repository.createList(list: TaskList.namedList(_listName));
+  }
+}
+
+class ListNotifier extends ChangeNotifier {
+  final IListRepository repository;
+
+  List<TaskList> _taskLists = List<TaskList>.empty();
+
+  ListNotifier({required this.repository});
+
+  List<TaskList> get taskLists => _taskLists;
+
+  Future<List<TaskList>> fetchTaskList() async {
+    var result = await repository.readAllList();
+
+    _taskLists = result.fold((l) => List<TaskList>.empty(), (r) => r);
+    notifyListeners();
+
+    return _taskLists;
+  }
+
+  void selectList(TaskList taskList) async {
+    await repository.updateList(list: taskList.copyWith(isActive: true));
+
+    _taskLists.forEach((element) async {
+      if (element.isActive) {
+        await repository.updateList(list: element.copyWith(isActive: false));
       }
     });
-    notifyListeners();
+
+    await fetchTaskList();
   }
 }

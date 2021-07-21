@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todolist/src/features/List/application/list_providers.dart';
 import 'package:todolist/src/features/tasks/application/tasks_provider.dart';
 import 'package:todolist/src/presentation/home/home_page.dart';
 
@@ -7,6 +8,7 @@ class SplashScreenPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance?.addPostFrameCallback((_) async {
+      await context.read(listProvider).fetchTaskList();
       final getTasksResult =
           await context.read(tasksNotifierProvider).getTasks();
       getTasksResult.fold(

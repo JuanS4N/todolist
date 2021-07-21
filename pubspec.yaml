@@ -28,6 +28,7 @@ dependencies:
   flutter_riverpod: ^0.14.0+3
   hive: ^2.0.4
   hive_flutter: ^1.1.0
+  freezed_annotation:
 
 dev_dependencies:
   flutter_test:

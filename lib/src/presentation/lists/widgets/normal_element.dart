@@ -20,7 +20,7 @@ class NormalElement extends StatelessWidget {
         child: ListTile(
           title: Text(
             element.listName,
-            style: Theme.of(context).textTheme.bodyText2,
+            style: Theme.of(context).textTheme.bodyText1,
           ),
           onTap: () {
             context.read(listProvider).selectList(element);

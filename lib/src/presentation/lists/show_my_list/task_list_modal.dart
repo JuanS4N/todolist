@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todolist/src/features/List/application/list_providers.dart';
+import 'package:todolist/src/features/List/domain/entities/list_of_task.dart';
 import 'package:todolist/src/presentation/lists/widgets/create_list_cta.dart';
 import 'package:todolist/src/presentation/lists/widgets/items_list_viewer.dart';
 
@@ -13,6 +14,7 @@ void listViewBottomSheet(context) {
         return DraggableScrollableSheet(
           expand: false,
           initialChildSize: 0.30,
+          maxChildSize: 0.9,
           builder: (_, scrollController) {
             return SafeArea(child: TaskListView(scrollController));
           },
@@ -31,9 +33,10 @@ class TaskListView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Consumer(builder: (context, watch, child) {
-            final innerList = watch(listProvider).myLisy;
-            return Expanded(child: ItemsListView(innerList, controller));
+            final listItems = watch(listProvider).taskLists;
+            return Expanded(child: ItemsListView(listItems, controller));
           }),
+          //}),
           Divider(
             thickness: 1,
             color: Colors.black26,
