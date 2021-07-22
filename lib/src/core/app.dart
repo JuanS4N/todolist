@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
       theme: lightTheme,
       darkTheme: dartkTheme,
       themeMode: ThemeMode.system,
-      home: SplashScreenPage(),
+      home: const SplashScreenPage(),
     );
   }
 }

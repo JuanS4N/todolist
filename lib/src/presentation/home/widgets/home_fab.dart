@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todolist/src/features/list/application/list_providers.dart';
 
 import '../../../features/tasks/application/tasks_provider.dart';
 import '../../../features/tasks/domain/entities/task.dart';
@@ -13,12 +14,13 @@ class HomeFAB extends ConsumerWidget {
   Widget build(BuildContext context, ScopedReader watch) {
     return FloatingActionButton(
       onPressed: () async {
+        final String listId = context.read(listProvider).selectedListId;
         Task parentTask = Task(
-            title: 'Main task with no subtasks',
+            title: 'Task 2 - Segunda lista',
             modified: DateTime.now(),
             date: DateTime(2021, 8, 12),
             description: 'Task description',
-            listId: 'listId');
+            listId: listId);
         // await Future.delayed(Duration(milliseconds: 2));
         // final subtask1 = Task(title: 'Subtask 1 P8', parentTask: parentTask.id);
         // await Future.delayed(Duration(milliseconds: 2));

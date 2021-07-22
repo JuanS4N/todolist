@@ -55,7 +55,8 @@ class TasksNotifier extends ChangeNotifier {
     return subtasks;
   }
 
-  Future<Either<DatabaseFailure, Unit>> getTasks() async {
+  Future<Either<DatabaseFailure, Unit>> getTasks(
+      {required String selectedListId}) async {
     final result = await tasksRepository.readTasks();
     return result.fold(
       (failure) {
@@ -63,7 +64,9 @@ class TasksNotifier extends ChangeNotifier {
         return left(failure);
       },
       (tasks) {
-        _tasks = tasks;
+        _tasks = tasks
+            .where((listTask) => listTask.listId == selectedListId)
+            .toList();
         _sortTasks();
         return right(unit);
       },

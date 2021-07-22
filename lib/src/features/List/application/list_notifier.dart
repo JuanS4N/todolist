@@ -43,6 +43,9 @@ class ListNotifier extends ChangeNotifier {
 
   List<TaskList> get taskLists => _taskLists;
 
+  String get selectedListId =>
+      _taskLists.firstWhere((list) => list.isActive).listId.toString();
+
   Future<List<TaskList>> fetchTaskList() async {
     var result = await repository.readAllList();
 

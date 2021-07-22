@@ -29,6 +29,7 @@ class HiveListRepository extends IListRepository {
   @override
   Future<Either<DatabaseFailure, List<TaskList>>> readAllList() async {
     try {
+      await checkBox(BOX_NAME);
       final List<TaskList> userList = Hive.box<HiveListObject>(BOX_NAME)
           .values
           .map((hiveListObject) => TaskList.fromHiveDTO(hiveListObject))
@@ -42,7 +43,7 @@ class HiveListRepository extends IListRepository {
     }
   }
 
-  void checkBox(String boxName) async {
+  Future<void> checkBox(String boxName) async {
     print("Checking box");
     if (!Hive.isBoxOpen(boxName)) {
       print("Crerating box");

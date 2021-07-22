@@ -6,12 +6,16 @@ import '../../features/tasks/application/tasks_provider.dart';
 import '../home/home_page.dart';
 
 class SplashScreenPage extends StatelessWidget {
+  const SplashScreenPage();
+
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance?.addPostFrameCallback((_) async {
       await context.read(listProvider).fetchTaskList();
-      final getTasksResult =
-          await context.read(tasksNotifierProvider).getTasks();
+      final selectedListId = context.read(listProvider).selectedListId;
+      final getTasksResult = await context
+          .read(tasksNotifierProvider)
+          .getTasks(selectedListId: selectedListId);
       getTasksResult.fold(
         (failure) => print(failure),
         (_) => Navigator.of(context).pushReplacement(
