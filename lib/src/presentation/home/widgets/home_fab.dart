@@ -14,11 +14,11 @@ class HomeFAB extends ConsumerWidget {
     return FloatingActionButton(
       onPressed: () async {
         Task parentTask = Task(
-          title: 'Main task with no subtasks',
-          modified: DateTime.now(),
-          date: DateTime(2021, 8, 12),
-          description: 'Task description',
-        );
+            title: 'Main task with no subtasks',
+            modified: DateTime.now(),
+            date: DateTime(2021, 8, 12),
+            description: 'Task description',
+            listId: 'listId');
         // await Future.delayed(Duration(milliseconds: 2));
         // final subtask1 = Task(title: 'Subtask 1 P8', parentTask: parentTask.id);
         // await Future.delayed(Duration(milliseconds: 2));

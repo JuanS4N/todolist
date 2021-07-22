@@ -20,7 +20,8 @@ class _TaskPageState extends State<TaskPage> {
   void initState() {
     super.initState();
     task = widget.task.copyWith();
-    subtasks = List.generate(10, (index) => Task(title: 'Subtask: $index'));
+    subtasks = List.generate(
+        10, (index) => Task(title: 'Subtask: $index', listId: 'listId'));
   }
 
   @override
