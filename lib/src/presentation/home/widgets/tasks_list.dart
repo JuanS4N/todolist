@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todolist/src/core/utils.dart';
-import 'package:todolist/src/features/tasks/domain/entities/task.dart';
 import 'package:todolist/src/presentation/home/widgets/completed_tasks_list.dart';
 
 import '../../../features/tasks/application/tasks_provider.dart';
@@ -70,44 +69,11 @@ class _TasksListState extends State<TasksList> {
                       });
                   },
                 ),
-                // child: AnimatedSwitcher(
-                //   duration: Duration(milliseconds: 300),
-                //   child: tasksNotifier.completedTasks.isEmpty
-                //       ? Container()
-                //       : ExpansionTile(
-                //           title: Text(
-                //             "Completed",
-                //             style: TextStyle(
-                //                 fontSize: 20.0, fontWeight: FontWeight.normal),
-                //           ),
-                //           onExpansionChanged: (expanded) {
-                //   if (expanded)
-                //     _scrollController.animateTo(
-                //         contextSize(context).height * 0.2,
-                //         duration: Duration(milliseconds: 300),
-                //         curve: Curves.easeOut);
-                // },
-                //           children: _children(tasksNotifier.completedTasks),
-                //         ),
-                // ),
               ),
             ],
           ),
         );
       },
     );
-  }
-
-  List<Widget> _children(List<Task> tasks) {
-    List<Widget> result = [];
-    for (int i = 0; i < tasks.length; i++) {
-      final task = tasks[i];
-      result.add(
-        ListTile(
-          title: Text(task.title),
-        ),
-      );
-    }
-    return result;
   }
 }

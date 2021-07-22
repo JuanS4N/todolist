@@ -5,7 +5,10 @@ import 'package:todolist/src/presentation/task_details/widgets/icon_prefix_widge
 class DateTimeDialog extends StatefulWidget {
   const DateTimeDialog({
     Key? key,
+    this.date,
   }) : super(key: key);
+
+  final DateTime? date;
 
   @override
   _DateTimeDialogState createState() => _DateTimeDialogState();
@@ -14,14 +17,20 @@ class DateTimeDialog extends StatefulWidget {
 class _DateTimeDialogState extends State<DateTimeDialog> {
   final currentYear = DateTime(DateTime.now().year);
 
-  late DateTime _date;
-  TimeOfDay? _time;
+  DateTime? selectedDate;
+  TimeOfDay? selectedTime;
 
   @override
   void initState() {
     super.initState();
-    _date = DateTime.now();
-    // _time = TimeOfDay.fromDateTime(_date);
+    if (widget.date != null) {
+      selectedDate =
+          DateTime(widget.date!.year, widget.date!.month, widget.date!.day);
+      selectedTime = TimeOfDay.fromDateTime(widget.date!);
+    } else {
+      // _date = DateTime.now();
+      // _time = TimeOfDay.fromDateTime(_date);
+    }
   }
 
   @override
@@ -31,20 +40,21 @@ class _DateTimeDialogState extends State<DateTimeDialog> {
         borderRadius: BorderRadius.circular(7.5),
       ),
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: contextSize(context).width * 0.01),
+        padding: EdgeInsets.symmetric(
+            vertical: 15.0, horizontal: contextSize(context).width * 0.01),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Material(
               color: Colors.transparent,
               child: CalendarDatePicker(
-                initialDate: _date,
+                initialDate: DateTime.now(),
                 firstDate: DateTime.now(),
-                currentDate: _date,
+                currentDate: selectedDate,
                 lastDate: currentYear.add(Duration(days: 365)),
                 onDateChanged: (DateTime value) {
                   setState(() {
-                    _date = value;
+                    selectedDate = value;
                   });
                 },
               ),
@@ -54,13 +64,13 @@ class _DateTimeDialogState extends State<DateTimeDialog> {
                 final newTime = await showTimePicker(
                   context: context,
                   initialEntryMode: TimePickerEntryMode.dial,
-                  initialTime: _time ?? TimeOfDay.fromDateTime(_date),
+                  initialTime: selectedTime ?? TimeOfDay.now(),
                 );
 
                 if (newTime == null) return;
 
                 setState(() {
-                  _time = newTime;
+                  selectedTime = newTime;
                 });
               },
               child: IconPrefixWidget(
@@ -78,14 +88,15 @@ class _DateTimeDialogState extends State<DateTimeDialog> {
                     ),
                     padding:
                         EdgeInsets.symmetric(horizontal: 10.0, vertical: 7.5),
-                    child: Text(_time?.format(context) ?? 'Sample text'),
+                    child: Text(selectedTime?.format(context) ?? 'Sample text'),
                   ),
                 ),
               ),
             ),
             SizedBox(height: 15.0),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: contextSize(context).width * 0.035),
+              margin: EdgeInsets.symmetric(
+                  horizontal: contextSize(context).width * 0.035),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -97,8 +108,16 @@ class _DateTimeDialogState extends State<DateTimeDialog> {
                   SizedBox(width: contextSize(context).width * 0.05),
                   TextButton(
                     onPressed: () {
-                      DateTime finalDate = DateTime(_date.year, _date.month,
-                          _date.day, _time?.hour ?? 0, _time?.minute ?? 0);
+                      DateTime? finalDate;
+                      if (selectedDate != null) {
+                        finalDate = DateTime(
+                          selectedDate!.year,
+                          selectedDate!.month,
+                          selectedDate!.day,
+                          selectedTime?.hour ?? 0,
+                          selectedTime?.minute ?? 0,
+                        );
+                      }
                       Navigator.pop(context, finalDate);
                     },
                     child: Text('Listo'),
