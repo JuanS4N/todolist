@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:hive/hive.dart';
-import '../domain/contracts/i_repositories.dart';
-import '../domain/entities/list_of_task.dart';
-import 'list_hive_dto.dart';
+import '../../list/domain/contracts/i_repositories.dart';
+import '../../list/domain/entities/list_of_task.dart';
+import '../../list/repositories/list_hive_dto.dart';
 import '../../tasks/domain/entities/database_failures/database_failure.dart';
 
 class HiveListRepository extends IListRepository {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todolist/src/features/list/application/list_providers.dart';
 
+import '../../../features/list/application/list_providers.dart';
 import '../../../features/tasks/application/tasks_provider.dart';
 import '../../../features/tasks/domain/entities/task.dart';
 

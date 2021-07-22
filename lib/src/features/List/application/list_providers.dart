@@ -1,8 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todolist/src/features/list/application/list_notifier.dart';
 
 import '../domain/contracts/i_repositories.dart';
 import '../repositories/hive_list_repository.dart';
-import 'list_notifier.dart';
+// import 'list_notifier.dart';
 
 final listLocalRepositoryProvider = Provider((ref) => new HiveListRepository());
 
