@@ -14,6 +14,7 @@ class TasksNotifier extends ChangeNotifier {
   List<Task> _tasks = [];
 
   List<Task> get tasks => _tasks;
+
   List<Task> get uncompletedTasks {
     final tasksList = _tasks
         .where((task) => !task.completed && task.parentTask == null)

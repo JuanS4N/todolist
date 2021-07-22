@@ -27,7 +27,8 @@ class TasksListNotifier extends ChangeNotifier {
   //   // to.insertItem(0);
   // }
 
-  Future<void> uncompleteTask(int index, Task task, SliverAnimatedListState uncompletedState) async{
+  Future<void> uncompleteTask(
+      int index, Task task, SliverAnimatedListState uncompletedState) async {
     await read(tasksNotifierProvider).toggleTaskCompleted(task: task);
     uncompletedState.insertItem(0);
   }
@@ -53,8 +54,16 @@ class TasksListNotifier extends ChangeNotifier {
     await read(tasksNotifierProvider).toggleTaskCompleted(task: task);
     uncompletedState.removeItem(
       index,
-      (context, animation) => UncompletedTaskTile(task: task, animation: animation),
+      (context, animation) =>
+          UncompletedTaskTile(task: task, animation: animation),
       duration: Duration(milliseconds: 250),
     );
+  }
+
+  List<Task> getSubtasksFromParent(Task task) {
+    late List<Task> _subtasks;
+    _subtasks =
+        read(tasksNotifierProvider).getSubtasks(subtasksIds: task.subtasks);
+    return _subtasks;
   }
 }

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:todolist/src/core/utils.dart';
+import 'package:todolist/src/presentation/task_details/widgets/task_bottom_app_bar.dart';
+import 'package:todolist/src/presentation/task_details/widgets/task_date_selector.dart';
+import 'package:todolist/src/presentation/task_details/widgets/task_list_selector.dart';
 
-import '../../../core/task_theme_data.dart';
 import '../../../features/tasks/domain/entities/task.dart';
 import '../widgets/icon_prefix_widget.dart';
 import '../widgets/sub_task_tile.dart';
@@ -14,18 +17,25 @@ class TaskPage extends StatefulWidget {
 }
 
 class _TaskPageState extends State<TaskPage> {
+  late TextEditingController _titleController;
+  late TextEditingController _descriptionController;
+
   List<Task> subtasks = [];
   late Task task;
   @override
   void initState() {
     super.initState();
     task = widget.task.copyWith();
-    subtasks = List.generate(10, (index) => Task(title: 'Subtask: $index'));
+
+    _titleController =
+        TextEditingController.fromValue(TextEditingValue(text: task.title));
+    _descriptionController = TextEditingController.fromValue(
+        TextEditingValue(text: task.description ?? ''));
+
   }
 
   @override
   Widget build(BuildContext context) {
-    String _completed = task.completed ? 'no ' : '';
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -38,98 +48,47 @@ class _TaskPageState extends State<TaskPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            GestureDetector(
-              onTap: () {
-                print('clicked!');
-              },
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vitae ligula consequat, maximus diam non, finibus massa. Aenean sit amet enim eros. Etiam ligula purus, dictum quis nunc nec, dignissim rhoncus velit. Etiam id risus a turpis vestibulum ultrices. Nunc accumsan diam in euismod aliquet. Nulla porttitor velit vel nisl porttitor, sit amet elementum mi consequat. Nulla accumsan justo in nulla lacinia finibus. Pellentesque ultricies fermentum ligula sit amet viverra.',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText2
-                          ?.copyWith(color: activeColor),
-                    ),
-                  ),
-                  SizedBox(width: 10.0),
-                  Icon(Icons.arrow_drop_down, color: activeColor),
-                ],
-              ),
+            // Select / Change current list
+            TaskListSelector(
+              listname: 'List Name',
+              onTap: () {},
             ),
+
+            // Task Title
             TextField(
+              controller: _titleController,
               maxLines: null,
               scrollPhysics: NeverScrollableScrollPhysics(),
               decoration: InputDecoration(hintText: 'Ingresa un título'),
             ),
+
+            //  Task Description
             IconPrefixWidget(
               icon: Icons.subject,
               child: Expanded(
                 child: TextField(
+                  controller: _descriptionController,
                   scrollPhysics: NeverScrollableScrollPhysics(),
                   maxLines: null,
                   decoration: InputDecoration(
                     hintText: 'Agregar detalles',
                   ),
-                  //expands: true,
                 ),
               ),
             ),
-            InkWell(
-              onTap: task.date != null
-                  ? null
-                  : () async {
-                      DateTime? _date = await showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime.now(),
-                        lastDate: DateTime(2030),
-                      );
-                      if (_date == null) return;
-                      setState(() {
-                        task = task.copyWith(date: _date);
-                      });
-                      print(task);
-                    },
-              child: IconPrefixWidget(
-                icon: Icons.event_available,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                child: task.date == null
-                    ? Text('Agregar detalles')
-                    : InkWell(
-                        onTap: () {},
-                        borderRadius: BorderRadius.circular(20),
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 7.5, vertical: 5.0),
-                          decoration: ShapeDecoration(
-                            color: Colors.transparent,
-                            shape: StadiumBorder(
-                              side: BorderSide(color: unactiveColor),
-                            ),
-                          ),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Text(DateTime.now().toIso8601String()),
-                              SizedBox(width: 5),
-                              InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    task = task.copyWith(date: null);
-                                  });
-                                },
-                                borderRadius: BorderRadius.circular(50),
-                                child: Icon(Icons.clear_rounded, size: 17.5),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-              ),
+
+            // Task Date
+            TaskDateSelector(
+              date: task.date,
+              onChange: (newDate) {
+                print(newDate);
+              },
+              onDismiss: () {
+                print('dismiss');
+              },
             ),
+
+            // Subtasks
             IconPrefixWidget(
               icon: Icons.subdirectory_arrow_right_rounded,
               child: Expanded(
@@ -138,8 +97,16 @@ class _TaskPageState extends State<TaskPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: _subtasksBuilder(subtasks) +
                       [
-                        Container(
-                          child: Text('Hello'),
+                        TextButton(
+                          onPressed: () {
+                            // TODO: add subtask button
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: contextSize(context).width * 0.075),
+                            width: double.infinity,
+                            child: Text('Agregar subtarea'),
+                          ),
                         ),
                       ],
                 ),
@@ -148,21 +115,9 @@ class _TaskPageState extends State<TaskPage> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            InkWell(
-              onTap: () {},
-              child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
-                child: TextButton(
-                    onPressed: () {},
-                    child: Text('Marcar como ${_completed}completada')),
-              ),
-            ),
-          ],
-        ),
+      bottomNavigationBar: TaskBottomAppBar(
+        isCompleted: task.completed,
+        onTap: () {},
       ),
     );
   }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/task_theme_data.dart';
 import '../../../features/tasks/domain/entities/task.dart';
 import '../../widgets/date_container.dart';
 
