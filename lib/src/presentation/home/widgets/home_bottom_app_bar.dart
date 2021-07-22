@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:todolist/src/presentation/lists/show_my_list/task_list_modal.dart';
+import '../../lists/show_my_list/task_list_modal.dart';
 
 class HomeBottomAppBar extends StatelessWidget {
   const HomeBottomAppBar({

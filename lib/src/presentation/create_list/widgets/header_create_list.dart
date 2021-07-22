@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todolist/src/features/List/application/list_providers.dart';
+
+import '../../../features/list/application/list_providers.dart';
 
 class HeaderCreateList extends StatelessWidget {
   final String actionName = "Create list";

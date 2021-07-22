@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todolist/src/presentation/create_list/create_list.dart';
+
+import '../../create_list/create_list.dart';
 
 class CreateListCTA extends StatelessWidget {
   const CreateListCTA({Key? key}) : super(key: key);

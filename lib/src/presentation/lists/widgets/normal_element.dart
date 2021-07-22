@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todolist/src/features/List/application/list_providers.dart';
-import 'package:todolist/src/features/List/domain/entities/list_of_task.dart';
+
+import '../../../features/list/application/list_providers.dart';
+import '../../../features/list/domain/entities/list_of_task.dart';
 
 class NormalElement extends StatelessWidget {
   final TaskList element;

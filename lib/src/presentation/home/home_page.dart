@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:todolist/src/presentation/home/widgets/tasks_list.dart';
 
 import 'widgets/home_bottom_app_bar.dart';
 import 'widgets/home_fab.dart';
+import 'widgets/tasks_list.dart';
 
 class HomePage extends StatelessWidget {
   @override
