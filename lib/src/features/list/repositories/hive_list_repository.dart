@@ -1,10 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:hive/hive.dart';
-import 'package:todolist/src/presentation/home/widgets/tasks_list_body.dart';
-import '../../list/domain/contracts/i_repositories.dart';
-import '../../list/domain/entities/list_of_task.dart';
-import '../../list/repositories/list_hive_dto.dart';
-import '../../tasks/domain/entities/database_failures/database_failure.dart';
+import 'package:todolist/src/features/list/domain/contracts/i_repositories.dart';
+import 'package:todolist/src/features/list/domain/entities/list_of_task.dart';
+import 'package:todolist/src/features/list/repositories/list_hive_dto.dart';
+import 'package:todolist/src/features/tasks/domain/entities/database_failures/database_failure.dart';
 
 class HiveListRepository extends IListRepository {
   static final String BOX_NAME = "list";
@@ -49,12 +48,12 @@ class HiveListRepository extends IListRepository {
     if (!Hive.isBoxOpen(boxName)) {
       print("Crerating box");
       var opened = await Hive.openBox<HiveListObject>(boxName);
-      if(opened.isEmpty){
-         var defaultList = TaskList(
-           isActive: true,
-           listName: 'Default List',
-           listId: 0,
-         );
+      if (opened.isEmpty) {
+        var defaultList = TaskList(
+          isActive: true,
+          listName: 'Default List',
+          listId: 0,
+        );
         createList(list: defaultList);
       }
     }
@@ -73,5 +72,4 @@ class HiveListRepository extends IListRepository {
       return left(const DatabaseFailure.serverError());
     }
   }
-
 }

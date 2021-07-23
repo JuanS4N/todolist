@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-import '../../../list/repositories/list_hive_dto.dart';
+import 'package:todolist/src/features/list/repositories/list_hive_dto.dart';
 
 part 'list_of_task.freezed.dart';
 
