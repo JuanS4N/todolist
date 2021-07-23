@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../../features/list/application/list_providers.dart';
+import 'package:todolist/src/core/utils.dart';
+import 'package:todolist/src/features/list/application/list_providers.dart';
 import '../widgets/create_list_cta.dart';
 import '../widgets/items_list_viewer.dart';
 

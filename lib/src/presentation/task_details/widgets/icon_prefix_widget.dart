@@ -6,16 +6,26 @@ class IconPrefixWidget extends StatelessWidget {
     required this.icon,
     required this.child,
     this.crossAxisAlignment = CrossAxisAlignment.start,
+    this.spaceBetween = 0,
+    this.margin = EdgeInsets.zero,
   }) : super(key: key);
+
   final IconData icon;
-  final Widget child;
+  final double spaceBetween;
+  
   final CrossAxisAlignment crossAxisAlignment;
+  final EdgeInsets margin;
+  
+  final Widget child;
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: crossAxisAlignment,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [Icon(icon), child],
+    return Container(
+      margin: margin,
+      child: Row(
+        crossAxisAlignment: crossAxisAlignment,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [Icon(icon), SizedBox(width: spaceBetween), child],
+      ),
     );
   }
 }

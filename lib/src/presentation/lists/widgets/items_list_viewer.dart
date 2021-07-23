@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:todolist/src/features/list/domain/entities/list_of_task.dart';
+import 'package:todolist/src/presentation/lists/widgets/list_element.dart';
 
-import '../../../features/list/domain/entities/list_of_task.dart';
-import 'list_element.dart';
 
 class ItemsListView extends StatelessWidget {
   final List<TaskList> listItems;
