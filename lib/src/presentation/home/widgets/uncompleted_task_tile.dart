@@ -8,16 +8,16 @@ class UncompletedTaskTile extends StatelessWidget {
     Key? key,
     required this.task,
     required this.animation,
-    this.onIconPressed,
-    this.onTaskPressed,
-    this.datePick,
+     this.onDateChanged,
+     this.onIconPressed,
+     this.onTaskPressed,
   }) : super(key: key);
 
   final Task task;
   final Animation<double> animation;
   final Function()? onIconPressed;
   final Function()? onTaskPressed;
-  final Function()? datePick;
+  final Function(DateTime)? onDateChanged;
   //final bool titleOnly;
 
   @override
@@ -52,7 +52,8 @@ class UncompletedTaskTile extends StatelessWidget {
       onTap: onTaskPressed,
       child: Container(
         padding: isSubtask ? EdgeInsets.only(left: size.width * 0.065) : null,
-        margin: EdgeInsets.symmetric(horizontal: size.width * 0.015, vertical: 7.5),
+        margin:
+            EdgeInsets.symmetric(horizontal: size.width * 0.015, vertical: 7.5),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -74,16 +75,20 @@ class UncompletedTaskTile extends StatelessWidget {
                     maxLines: 5,
                     style: Theme.of(context).textTheme.subtitle1,
                   ),
-                  Visibility(
-                    visible: task.description != null,
-                    child: _descriptionBuilder(size, context),
-                  ),
-                  DateContainer(
-                    date: DateTime.now(),
-                    onPressed: (DateTime date) {
-                      print(date.toString());
-                    },
-                  ),
+
+                  // TASK descriptio
+                  if (task.description != null && task.description!.isNotEmpty)
+                    _descriptionBuilder(size, context),
+
+                  // TASK date container
+                  if (task.date != null)
+                    DateContainer(
+                      date: task.date!,
+                      onPressed: (DateTime? newDate) {
+                        if (newDate == null) return;
+                        if (newDate != task.date && onDateChanged != null) onDateChanged!(newDate);
+                      },
+                    ),
                 ],
               ),
             ),

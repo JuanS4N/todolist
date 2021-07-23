@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todolist/src/core/utils.dart';
@@ -7,18 +9,19 @@ import '../../../features/tasks/application/tasks_provider.dart';
 import '../logic/tasks_providers.dart';
 import 'uncompleted_tasks_list.dart';
 
-class TasksList extends StatefulWidget {
-  TasksList({Key? key}) : super(key: key);
+class TasksListBody extends StatefulWidget {
+  TasksListBody({Key? key}) : super(key: key);
 
   @override
-  _TasksListState createState() => _TasksListState();
+  _TasksListBodyState createState() => _TasksListBodyState();
 }
 
-class _TasksListState extends State<TasksList> {
+class _TasksListBodyState extends State<TasksListBody> {
   final _uncompletedKey = GlobalKey<SliverAnimatedListState>();
   // final _completedKey = GlobalKey<SliverAnimatedListState>();
   final _scrollController = ScrollController();
 
+  bool holaChao = false;
   @override
   Widget build(BuildContext context) {
     return Consumer(
@@ -46,11 +49,10 @@ class _TasksListState extends State<TasksList> {
               UncompletedTasksList(
                 myKey: _uncompletedKey,
                 tasks: tasksNotifier.uncompletedTasks,
-                onChanged: (task, index) => read.completeTask(
+                onCompletedTask: (task, index) => read.completeTask(
                   index,
                   task,
                   _uncompletedKey.currentState!,
-                  // _completedKey.currentState!,
                 ),
               ),
               SliverToBoxAdapter(
@@ -63,7 +65,6 @@ class _TasksListState extends State<TasksList> {
                       Future.delayed(Duration(milliseconds: 100), () {
                         _scrollController.animateTo(
                             _scrollController.position.maxScrollExtent,
-                            // contextSize(context).height * 0.2,
                             duration: Duration(milliseconds: 300),
                             curve: Curves.easeOut);
                       });

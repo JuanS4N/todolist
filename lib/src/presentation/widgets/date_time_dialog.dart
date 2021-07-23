@@ -48,10 +48,10 @@ class _DateTimeDialogState extends State<DateTimeDialog> {
             Material(
               color: Colors.transparent,
               child: CalendarDatePicker(
-                initialDate: DateTime.now(),
+                initialDate: selectedDate ?? DateTime.now(),
                 firstDate: DateTime.now(),
                 currentDate: selectedDate,
-                lastDate: currentYear.add(Duration(days: 365)),
+                lastDate: currentYear.add(Duration(days: 365 * 5)),
                 onDateChanged: (DateTime value) {
                   setState(() {
                     selectedDate = value;

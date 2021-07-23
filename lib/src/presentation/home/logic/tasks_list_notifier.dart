@@ -52,6 +52,7 @@ class TasksListNotifier extends ChangeNotifier {
     }
 
     await read(tasksNotifierProvider).toggleTaskCompleted(task: task);
+    
     uncompletedState.removeItem(
       index,
       (context, animation) =>
@@ -65,5 +66,9 @@ class TasksListNotifier extends ChangeNotifier {
     _subtasks =
         read(tasksNotifierProvider).getSubtasks(subtasksIds: task.subtasks);
     return _subtasks;
+  }
+
+  Future<void> updateTask(Task task)async {
+    await read(tasksNotifierProvider).updateTask(newTaskInfo: task);
   }
 }
