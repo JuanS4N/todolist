@@ -30,7 +30,7 @@ class TasksListNotifier extends ChangeNotifier {
   Future<void> uncompleteTask(
       int index, Task task, SliverAnimatedListState uncompletedState) async {
     await read(tasksNotifierProvider).toggleTaskCompleted(task: task);
-    uncompletedState.insertItem(0);
+    uncompletedState.insertItem(index);
   }
 
   Future<void> completeTask(
@@ -47,8 +47,7 @@ class TasksListNotifier extends ChangeNotifier {
     while (_subtasks.isNotEmpty) {
       Task _task = read(tasksNotifierProvider).getTaskById(_subtasks[0]);
       _subtasks.removeAt(0);
-      await completeTask(index + 1, _task, uncompletedState,
-          subtasks: _subtasks);
+      await completeTask(index + 1, _task, uncompletedState);
     }
 
     await read(tasksNotifierProvider).toggleTaskCompleted(task: task);
