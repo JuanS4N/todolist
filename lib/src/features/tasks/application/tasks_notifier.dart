@@ -21,7 +21,6 @@ class CreateTaskNotifier extends ChangeNotifier {
   void toggleShowDescription() {
     this.showDescription = !this.showDescription;
     this.description = "";
-    print(showDescription);
     notifyListeners();
   }
 
@@ -33,7 +32,6 @@ class CreateTaskNotifier extends ChangeNotifier {
 
   void setName(String taskName) {
     this._title = taskName;
-    print(this._title);
     validateName();
   }
 
@@ -43,6 +41,7 @@ class CreateTaskNotifier extends ChangeNotifier {
     this.date = null;
     this.description = "";
     this._isReadyToBeCreated = false;
+    this.showDescription = false;
 
     notifyListeners();
   }
@@ -60,10 +59,8 @@ class CreateTaskNotifier extends ChangeNotifier {
 
   void validateName() {
     if (this._title.length > 0) {
-      print("Its is valid");
       this._isReadyToBeCreated = true;
     } else {
-      print("neim");
       this._isReadyToBeCreated = false;
     }
 
