@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todolist/src/features/list/application/list_providers.dart';
+import 'package:todolist/src/features/tasks/application/tasks_provider.dart';
 
 void createListModal(context) {
   showModalBottomSheet(
@@ -11,6 +14,7 @@ void createListModal(context) {
 
 class CreateTaskForm extends StatelessWidget {
   final createTaskHint = "New task";
+  final descriptionTaskHint = "Add details";
   final createTaskCTA = "Save";
   final iconSize = 30.0;
 
@@ -20,76 +24,119 @@ class CreateTaskForm extends StatelessWidget {
   Widget build(BuildContext context) {
     final iconColor = Colors.blue.shade800;
 
-    return Container(
-      margin: EdgeInsets.only(top: 20.0, bottom: 20.0, left: 10, right: 20),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            margin: EdgeInsets.only(bottom: 20, left: 10),
-            child: TextField(
-              autofocus: true,
-              decoration: InputDecoration(hintText: createTaskHint),
+    final selectedListId = context.read(listProvider).selectedListId;
+    final createTaskProv = context.read(createTaskProvider);
+
+    createTaskProv.listId = selectedListId;
+
+    return WillPopScope(
+      onWillPop: () async {
+        print("Gud bye");
+        createTaskProv.resetValues();
+        return true;
+      },
+      child: Container(
+        margin: EdgeInsets.only(top: 20.0, bottom: 20.0, left: 10, right: 20),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              margin: EdgeInsets.only(bottom: 20, left: 10),
+              child: TextField(
+                onChanged: (str) => createTaskProv.setName(str),
+                autofocus: true,
+                decoration: InputDecoration(hintText: createTaskHint),
+              ),
             ),
-          ),
-          Container(
-            margin: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  child: Row(
-                    children: [
-                      IconCTA(
-                        iconData: Icons.notes,
-                        iconColor: iconColor,
-                        iconSize: iconSize,
-                        onTap: () {
-                          print("Hi dude");
-                        },
-                      ),
-                      IconCTA(
-                        iconData: Icons.event_available,
-                        iconColor: iconColor,
-                        iconSize: iconSize,
-                        onTap: () {
-                          print("Told me");
-                        },
-                      ),
-                    ],
+            Container(
+              margin: EdgeInsets.only(bottom: 10, left: 10),
+              child: Consumer(builder: (context, watch, child) {
+                final innerCreateTaskProv = watch(createTaskProvider);
+                return Visibility(
+                  child: TextField(
+                    onChanged: (str) => createTaskProv.description = str,
+                    autofocus: true,
+                    style: TextStyle(fontSize: 15, color: Colors.black54),
+                    decoration: InputDecoration(hintText: descriptionTaskHint),
                   ),
-                ),
-                TextCTA(createTaskCTA: createTaskCTA, iconColor: iconColor)
-              ],
+                  visible: innerCreateTaskProv.showDescription,
+                );
+              }),
             ),
-          )
-        ],
+            Container(
+              margin: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    child: Row(
+                      children: [
+                        IconCTA(
+                          iconData: Icons.notes,
+                          iconColor: iconColor,
+                          iconSize: iconSize,
+                          onTap: () {
+                            createTaskProv.toggleShowDescription();
+                          },
+                        ),
+                        IconCTA(
+                          iconData: Icons.event_available,
+                          iconColor: iconColor,
+                          iconSize: iconSize,
+                          onTap: () {
+                            print("Told me");
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  Consumer(
+                    builder: (contex, watch, child) {
+                      final createTaskP = watch(createTaskProvider);
+                      return TextCTA(
+                        createTaskCTA: createTaskCTA,
+                        iconColor: iconColor,
+                        onTap: createTaskP.isReadyToBeCreated
+                            ? () async {
+                                print("We are ready!");
+                                await createTaskP.createTask();
+                                Navigator.of(context).maybePop();
+                              }
+                            : null,
+                      );
+                    },
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
 }
 
 class TextCTA extends StatelessWidget {
-  const TextCTA({
-    Key? key,
-    required this.createTaskCTA,
-    required this.iconColor,
-  }) : super(key: key);
+  const TextCTA(
+      {Key? key,
+      required this.createTaskCTA,
+      required this.iconColor,
+      required this.onTap})
+      : super(key: key);
 
   final String createTaskCTA;
   final Color iconColor;
+
+  final Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: TextButton(
-          onPressed: () {},
-          child: Text(createTaskCTA,
-              style: Theme.of(context)
-                  .textTheme
-                  .button!
-                  .copyWith(color: iconColor, fontSize: 18))),
+        onPressed: onTap,
+        child: Text(createTaskCTA),
+      ),
     );
   }
 }
