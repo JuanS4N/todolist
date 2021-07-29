@@ -74,6 +74,7 @@ class TasksNotifier extends ChangeNotifier {
   }
 
   Future<void> createTask({required Task task}) async {
+    print("Creating -> " + task.toString());
     _tasks.insert(0, task);
     await tasksRepository.createTask(task: task);
     notifyListeners();

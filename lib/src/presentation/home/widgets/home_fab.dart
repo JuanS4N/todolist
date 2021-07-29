@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todolist/src/features/list/application/list_providers.dart';
 import 'package:todolist/src/features/tasks/application/tasks_provider.dart';
 import 'package:todolist/src/features/tasks/domain/entities/task.dart';
+import 'package:todolist/src/presentation/create_task/create_task.dart';
 
 class HomeFAB extends ConsumerWidget {
   const HomeFAB({
@@ -15,6 +16,8 @@ class HomeFAB extends ConsumerWidget {
   Widget build(BuildContext context, ScopedReader watch) {
     return FloatingActionButton(
       onPressed: () async {
+        createListModal(context);
+        /*
         final String listId = context.read(listProvider).selectedListId;
         Task parentTask = Task(
             title: 'Task32 - Segunda lista',
@@ -41,6 +44,8 @@ class HomeFAB extends ConsumerWidget {
             .read(tasksNotifierProvider)
             .createTask(task: parentTask)
             .then((value) => log('exit'));
+
+            */
       },
       child: Icon(Icons.add),
       elevation: 0.0,
