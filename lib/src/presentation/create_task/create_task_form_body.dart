@@ -54,7 +54,7 @@ class _CreateTaskFormBody extends State<CreateTaskFormBody> {
     });
   }
 
-  void setTaskDate({DateTime? date = null}) {
+  void setTaskDate({DateTime? date}) {
     setState(() {
       _taskDate = date;
     });
