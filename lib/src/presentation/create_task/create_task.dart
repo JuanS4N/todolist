@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todolist/src/features/tasks/application/tasks_provider.dart';
 import 'create_task_form_body.dart';
 
 void createListModal(context) {
@@ -17,10 +15,8 @@ class CreateTaskForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final createTaskProv = context.read(createTaskProvider);
     return WillPopScope(
       onWillPop: () async {
-        createTaskProv.resetValues();
         return true;
       },
       child: SafeArea(child: CreateTaskFormBody()),

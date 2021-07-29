@@ -12,8 +12,3 @@ final tasksNotifierProvider = ChangeNotifierProvider<TasksNotifier>((ref) {
   final ITasksRepository _tasksRepository = ref.watch(localTasksRepository);
   return TasksNotifier(tasksRepository: _tasksRepository);
 });
-
-final createTaskProvider = ChangeNotifierProvider<CreateTaskNotifier>((ref) {
-  final ITasksRepository _taskRepository = ref.watch(localTasksRepository);
-  return CreateTaskNotifier(taskRepository: _taskRepository, reference: ref);
-});

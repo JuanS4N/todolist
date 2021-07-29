@@ -1,79 +1,8 @@
 import 'package:dartz/dartz.dart' hide Task;
 import 'package:flutter/foundation.dart';
-import 'package:riverpod/src/framework.dart';
-import 'package:todolist/src/features/tasks/application/tasks_provider.dart';
 import 'package:todolist/src/features/tasks/domain/entities/database_failures/database_failure.dart';
 import 'package:todolist/src/features/tasks/domain/entities/task.dart';
 import 'package:todolist/src/features/tasks/domain/interface/i_tasks_repository.dart';
-
-class CreateTaskNotifier extends ChangeNotifier {
-  final ITasksRepository taskRepository;
-  final ProviderReference reference;
-
-  late String _title;
-  late String listId;
-
-  bool showDescription = false;
-  bool _isReadyToBeCreated = false;
-  DateTime? _date;
-  String? description;
-
-  set date(DateTime) {
-    this._date = DateTime;
-    notifyListeners();
-  }
-
-  get date => this._date;
-
-  void toggleShowDescription() {
-    this.showDescription = !this.showDescription;
-    this.description = "";
-    notifyListeners();
-  }
-
-  get isReadyToBeCreated => this._isReadyToBeCreated;
-
-  CreateTaskNotifier({required this.taskRepository, required this.reference}) {
-    resetValues();
-  }
-
-  void setName(String taskName) {
-    this._title = taskName;
-    validateName();
-  }
-
-  void resetValues() {
-    this._title = "";
-    this.listId = "";
-    this.date = null;
-    this.description = "";
-    this._isReadyToBeCreated = false;
-    this.showDescription = false;
-
-    notifyListeners();
-  }
-
-  Future<void> createTask() async {
-    if (_isReadyToBeCreated) {
-      await reference.watch(tasksNotifierProvider).createTask(
-          task: Task(
-              title: _title,
-              listId: listId,
-              date: date,
-              description: description));
-    }
-  }
-
-  void validateName() {
-    if (this._title.length > 0) {
-      this._isReadyToBeCreated = true;
-    } else {
-      this._isReadyToBeCreated = false;
-    }
-
-    notifyListeners();
-  }
-}
 
 class TasksNotifier extends ChangeNotifier {
   final ITasksRepository tasksRepository;
