@@ -15,8 +15,15 @@ class CreateTaskNotifier extends ChangeNotifier {
 
   bool showDescription = false;
   bool _isReadyToBeCreated = false;
-  DateTime? date;
+  DateTime? _date;
   String? description;
+
+  set date(DateTime) {
+    this._date = DateTime;
+    notifyListeners();
+  }
+
+  get date => this._date;
 
   void toggleShowDescription() {
     this.showDescription = !this.showDescription;

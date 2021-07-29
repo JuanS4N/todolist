@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todolist/src/core/utils.dart';
 import 'package:todolist/src/features/list/application/list_providers.dart';
 import 'package:todolist/src/features/tasks/application/tasks_provider.dart';
+import 'package:todolist/src/presentation/widgets/date_container.dart';
 
 import 'widgets/icon_cta.dart';
 import 'widgets/text_cta.dart';
@@ -54,6 +56,23 @@ class CreateTaskFormBody extends StatelessWidget {
             }),
           ),
           Container(
+              alignment: Alignment.centerLeft,
+              child: Consumer(builder: (context, watch, child) {
+                final innerProv = watch(createTaskProvider);
+
+                return innerProv.date != null
+                    ? DateContainer(
+                        date: innerProv.date!,
+                        onPressed: (date) async {
+                          innerProv.date = date;
+                        },
+                        onDismiss: () {
+                          innerProv.date = null;
+                        },
+                      )
+                    : Container();
+              })),
+          Container(
             margin: EdgeInsets.only(
                 bottom: MediaQuery.of(context).viewInsets.bottom),
             child: Row(
@@ -74,8 +93,10 @@ class CreateTaskFormBody extends StatelessWidget {
                         iconData: Icons.event_available,
                         iconColor: iconColor,
                         iconSize: iconSize,
-                        onTap: () {
-                          print("Told me");
+                        onTap: () async {
+                          DateTime? newDate =
+                              await selectDateTime(context, currentDate: null);
+                          createTaskProv.date = newDate;
                         },
                       ),
                     ],

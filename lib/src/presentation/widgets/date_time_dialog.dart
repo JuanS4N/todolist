@@ -23,6 +23,7 @@ class _DateTimeDialogState extends State<DateTimeDialog> {
   @override
   void initState() {
     super.initState();
+
     if (widget.date != null) {
       selectedDate =
           DateTime(widget.date!.year, widget.date!.month, widget.date!.day);

@@ -6,7 +6,7 @@ import 'create_task_form_body.dart';
 void createListModal(context) {
   showModalBottomSheet(
       context: context,
-      isScrollControlled: false,
+      isScrollControlled: true,
       builder: (BuildContext buildContext) {
         return CreateTaskForm();
       });
@@ -23,7 +23,7 @@ class CreateTaskForm extends StatelessWidget {
         createTaskProv.resetValues();
         return true;
       },
-      child: CreateTaskFormBody(),
+      child: SafeArea(child: CreateTaskFormBody()),
     );
   }
 }
