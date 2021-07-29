@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todolist/src/features/tasks/application/tasks_provider.dart';
-import 'package:todolist/src/presentation/create_task/create_task_form_body%20copy.dart';
 import 'create_task_form_body.dart';
 
 void createListModal(context) {
@@ -24,7 +23,7 @@ class CreateTaskForm extends StatelessWidget {
         createTaskProv.resetValues();
         return true;
       },
-      child: SafeArea(child: CreateTaskFormBodyV2()),
+      child: SafeArea(child: CreateTaskFormBody()),
     );
   }
 }

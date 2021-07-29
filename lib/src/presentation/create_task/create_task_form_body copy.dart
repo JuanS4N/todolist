@@ -51,6 +51,18 @@ class _CreateTaskFormBodyV2 extends State<CreateTaskFormBodyV2> {
     isReadyToBeCreated();
   }
 
+  void setTaskDescription(String str) {
+    setState(() {
+      _taskDescription = str;
+    });
+  }
+
+  void setTaskDate({DateTime? date = null}) {
+    setState(() {
+      _taskDate = date;
+    });
+  }
+
   void isReadyToBeCreated() {
     setState(() {
       if (_taskName.isEmpty) {
@@ -91,41 +103,31 @@ class _CreateTaskFormBodyV2 extends State<CreateTaskFormBodyV2> {
               decoration: InputDecoration(hintText: createTaskHint),
             ),
           ),
-          Visibility(
-            child: Container(
-              margin: EdgeInsets.only(left: 10, bottom: 10),
+          Container(
+            margin: EdgeInsets.only(left: 10, bottom: 10),
+            child: Visibility(
               child: TextField(
-                onChanged: (str) {
-                  setState(() {
-                    _taskDescription = str;
-                  });
-                },
+                onChanged: setTaskDescription,
                 autofocus: true,
                 style: TextStyle(fontSize: 15, color: Colors.black54),
                 decoration: InputDecoration(hintText: descriptionTaskHint),
               ),
+              visible: _showDescription,
             ),
-            visible: _showDescription,
           ),
-          _taskDate != null
-              ? Container(
-                  alignment: Alignment.centerLeft,
-                  margin: EdgeInsets.only(bottom: 10, left: 10),
-                  child: DateContainer(
-                    date: _taskDate!,
-                    onPressed: (date) async {
-                      setState(() {
-                        _taskDate = date;
-                      });
-                    },
-                    onDismiss: () {
-                      setState(() {
-                        _taskDate = null;
-                      });
-                    },
-                  ),
-                )
-              : Container(),
+          Container(
+            alignment: Alignment.centerLeft,
+            child: _taskDate != null
+                ? Container(
+                    margin: EdgeInsets.only(bottom: 10, left: 10),
+                    child: DateContainer(
+                      date: _taskDate!,
+                      onPressed: (date) => setTaskDate(date: date),
+                      onDismiss: setTaskDate,
+                    ),
+                  )
+                : Container(),
+          ),
           Container(
             margin: EdgeInsets.only(
                 bottom: MediaQuery.of(context).viewInsets.bottom),
@@ -159,6 +161,27 @@ class _CreateTaskFormBodyV2 extends State<CreateTaskFormBodyV2> {
             ),
           )
         ],
+      ),
+    );
+  }
+}
+
+class TextTaskNameInput extends StatelessWidget {
+  final void Function(String str) setTaskName;
+
+  final String createTaskHint;
+  const TextTaskNameInput(
+      {Key? key, required this.setTaskName, required this.createTaskHint})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 20, left: 10),
+      child: TextField(
+        onChanged: setTaskName,
+        autofocus: true,
+        decoration: InputDecoration(hintText: createTaskHint),
       ),
     );
   }
