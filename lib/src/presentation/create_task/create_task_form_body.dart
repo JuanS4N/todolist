@@ -4,7 +4,9 @@ import 'package:todolist/src/core/utils.dart';
 import 'package:todolist/src/features/list/application/list_providers.dart';
 import 'package:todolist/src/features/tasks/application/tasks_provider.dart';
 import 'package:todolist/src/features/tasks/domain/entities/task.dart';
+import 'package:todolist/src/presentation/splash/splash_screen_page.dart';
 import 'package:todolist/src/presentation/widgets/date_container.dart';
+import 'package:todolist/src/presentation/widgets/refresh_home.dart';
 
 import 'widgets/icon_cta.dart';
 import 'widgets/text_cta.dart';
@@ -80,7 +82,11 @@ class _CreateTaskFormBody extends State<CreateTaskFormBody> {
             title: _taskName,
             date: _taskDate,
             description: _taskDescription));
-    Navigator.of(context).maybePop();
+
+    //Navigator.of(context).maybePop();
+    Navigator.of(context).pushReplacement(
+      pageRouteBuilder(context),
+    );
   }
 
   @override
