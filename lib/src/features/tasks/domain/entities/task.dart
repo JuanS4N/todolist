@@ -39,6 +39,7 @@ class Task {
     String? parentTask,
     List<String>? subtasks,
     String? listId,
+    bool removeParent = false,
   }) {
     return Task(
       id: this.id,
@@ -47,7 +48,7 @@ class Task {
       modified: modified ?? this.modified,
       date: date ?? this.date,
       description: description ?? this.description,
-      parentTask: parentTask ?? this.parentTask,
+      parentTask: removeParent ? null : parentTask ?? this.parentTask,
       subtasks: subtasks ?? this.subtasks,
       listId: listId ?? this.listId,
     );

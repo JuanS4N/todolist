@@ -117,8 +117,8 @@ class TasksNotifier extends ChangeNotifier {
     }
     final newTaskInfo = task.copyWith(
       completed: !task.completed,
-      parentTask: removeParent ? null : task.parentTask,
       modified: DateTime.now(),
+      removeParent: removeParent,
     );
     await updateTask(newTaskInfo: newTaskInfo);
     // if (!task.completed && task.subtasks.isNotEmpty) {
