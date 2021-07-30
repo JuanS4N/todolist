@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:todolist/src/features/list/domain/entities/list_of_task.dart';
-import 'package:todolist/src/features/tasks/domain/entities/database_failures/database_failure.dart';
+
+import '../../../tasks/domain/entities/database_failures/database_failure.dart';
+import '../entities/list_of_task.dart';
 
 abstract class IListRepository {
   Future<Either<DatabaseFailure, Unit>> createList({required TaskList list});

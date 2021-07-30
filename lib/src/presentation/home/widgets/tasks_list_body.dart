@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todolist/src/core/utils.dart';
-import 'package:todolist/src/presentation/home/widgets/completed_tasks_list.dart';
 
+import '../../../core/utils.dart';
 import '../../../features/tasks/application/tasks_provider.dart';
 import '../logic/tasks_providers.dart';
+import 'completed_tasks_list.dart';
 import 'uncompleted_tasks_list.dart';
 
 class TasksListBody extends StatefulWidget {

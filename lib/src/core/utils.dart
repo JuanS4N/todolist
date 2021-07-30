@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:todolist/src/presentation/widgets/date_time_dialog.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
+
+import '../presentation/widgets/date_time_dialog.dart';
 
 Size contextSize(BuildContext context) => MediaQuery.of(context).size;
 

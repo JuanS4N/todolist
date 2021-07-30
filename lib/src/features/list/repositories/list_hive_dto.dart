@@ -1,5 +1,6 @@
 import 'package:hive/hive.dart';
-import 'package:todolist/src/features/list/domain/entities/list_of_task.dart';
+
+import '../domain/entities/list_of_task.dart';
 
 part 'list_hive_dto.g.dart';
 

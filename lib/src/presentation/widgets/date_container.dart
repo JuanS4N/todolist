@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:todolist/src/core/utils.dart';
 
 import '../../core/task_theme_data.dart';
+import '../../core/utils.dart';
 
 class DateContainer extends StatelessWidget {
   DateContainer({

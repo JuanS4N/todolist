@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todolist/src/core/utils.dart';
-import 'package:todolist/src/features/list/application/list_providers.dart';
-import 'package:todolist/src/features/tasks/application/tasks_provider.dart';
-import 'package:todolist/src/features/tasks/domain/entities/task.dart';
-import 'package:todolist/src/presentation/splash/splash_screen_page.dart';
-import 'package:todolist/src/presentation/widgets/date_container.dart';
-import 'package:todolist/src/presentation/widgets/refresh_home.dart';
 
+import '../../core/utils.dart';
+import '../../features/list/application/list_providers.dart';
+import '../../features/tasks/application/tasks_provider.dart';
+import '../../features/tasks/domain/entities/task.dart';
+import '../widgets/date_container.dart';
+import '../widgets/refresh_home.dart';
 import 'widgets/icon_cta.dart';
 import 'widgets/text_cta.dart';
 

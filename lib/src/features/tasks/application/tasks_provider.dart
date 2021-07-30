@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todolist/src/features/tasks/data/repositories/hive_tasks_repository.dart';
-import 'package:todolist/src/features/tasks/domain/interface/i_tasks_repository.dart';
+import '../data/repositories/hive_tasks_repository.dart';
+import '../domain/interface/i_tasks_repository.dart';
 
 import 'tasks_notifier.dart';
 

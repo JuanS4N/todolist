@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:todolist/src/features/tasks/domain/entities/task.dart';
-import 'package:todolist/src/presentation/home/widgets/completed_task_tile.dart';
-import 'package:todolist/src/presentation/task_details/pages/task_page.dart';
+import '../../../features/tasks/domain/entities/task.dart';
+import 'completed_task_tile.dart';
+import '../../task_details/pages/task_page.dart';
 
 class CompletedTasksList extends StatelessWidget {
   const CompletedTasksList({
