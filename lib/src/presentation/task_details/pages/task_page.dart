@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todolist/src/core/utils.dart';
-import 'package:todolist/src/presentation/home/logic/tasks_providers.dart';
-import 'package:todolist/src/presentation/task_details/widgets/task_bottom_app_bar.dart';
-import 'package:todolist/src/presentation/task_details/widgets/task_date_selector.dart';
-import 'package:todolist/src/presentation/task_details/widgets/task_list_selector.dart';
 
+import '../../../core/utils.dart';
 import '../../../features/tasks/domain/entities/task.dart';
+import '../../home/logic/tasks_providers.dart';
 import '../widgets/icon_prefix_widget.dart';
 import '../widgets/sub_task_tile.dart';
+import '../widgets/task_bottom_app_bar.dart';
+import '../widgets/task_date_selector.dart';
+import '../widgets/task_list_selector.dart';
 
 class TaskPage extends StatefulWidget {
   const TaskPage({Key? key, required this.task}) : super(key: key);

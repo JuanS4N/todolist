@@ -1,12 +1,10 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todolist/src/core/utils.dart';
-import 'package:todolist/src/presentation/home/widgets/completed_tasks_list.dart';
 
+import '../../../core/utils.dart';
 import '../../../features/tasks/application/tasks_provider.dart';
 import '../logic/tasks_providers.dart';
+import 'completed_tasks_list.dart';
 import 'uncompleted_tasks_list.dart';
 
 class TasksListBody extends StatefulWidget {
@@ -21,7 +19,6 @@ class _TasksListBodyState extends State<TasksListBody> {
   // final _completedKey = GlobalKey<SliverAnimatedListState>();
   final _scrollController = ScrollController();
 
-  bool holaChao = false;
   @override
   Widget build(BuildContext context) {
     return Consumer(
@@ -58,8 +55,8 @@ class _TasksListBodyState extends State<TasksListBody> {
               SliverToBoxAdapter(
                 child: CompletedTasksList(
                   completedTasks: tasksNotifier.completedTasks,
-                  onChanged: (task, index) => read.uncompleteTask(
-                      index, task, _uncompletedKey.currentState!),
+                  onChanged: (task, index) =>
+                      read.uncompleteTask(task, _uncompletedKey.currentState!),
                   onExpansionChanged: (expanded) {
                     if (expanded)
                       Future.delayed(Duration(milliseconds: 100), () {

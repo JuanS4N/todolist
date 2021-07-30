@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todolist/src/core/task_theme_data.dart';
+
+import '../../../core/task_theme_data.dart';
 
 class TaskListSelector extends StatelessWidget {
   const TaskListSelector({
@@ -10,7 +11,7 @@ class TaskListSelector extends StatelessWidget {
 
   final String listname;
   final Function() onTap;
-  
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

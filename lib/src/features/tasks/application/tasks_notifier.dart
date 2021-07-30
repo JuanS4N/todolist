@@ -1,8 +1,9 @@
 import 'package:dartz/dartz.dart' hide Task;
 import 'package:flutter/foundation.dart';
-import 'package:todolist/src/features/tasks/domain/entities/database_failures/database_failure.dart';
-import 'package:todolist/src/features/tasks/domain/entities/task.dart';
-import 'package:todolist/src/features/tasks/domain/interface/i_tasks_repository.dart';
+
+import '../domain/entities/database_failures/database_failure.dart';
+import '../domain/entities/task.dart';
+import '../domain/interface/i_tasks_repository.dart';
 
 class TasksNotifier extends ChangeNotifier {
   final ITasksRepository tasksRepository;
@@ -117,8 +118,8 @@ class TasksNotifier extends ChangeNotifier {
     }
     final newTaskInfo = task.copyWith(
       completed: !task.completed,
-      parentTask: removeParent ? null : task.parentTask,
       modified: DateTime.now(),
+      removeParent: removeParent,
     );
     await updateTask(newTaskInfo: newTaskInfo);
     // if (!task.completed && task.subtasks.isNotEmpty) {

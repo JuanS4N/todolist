@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:todolist/src/core/utils.dart';
-import 'package:todolist/src/presentation/task_details/widgets/icon_prefix_widget.dart';
-import 'package:todolist/src/presentation/widgets/date_container.dart';
+
+import '../../../core/utils.dart';
+import '../../widgets/date_container.dart';
+import 'icon_prefix_widget.dart';
 
 class TaskDateSelector extends StatelessWidget {
   const TaskDateSelector({

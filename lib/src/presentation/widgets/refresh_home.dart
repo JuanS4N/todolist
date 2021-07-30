@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todolist/src/presentation/home/home_page.dart';
+
+import '../home/home_page.dart';
 
 PageRouteBuilder pageRouteBuilder(BuildContext context) {
   return PageRouteBuilder(

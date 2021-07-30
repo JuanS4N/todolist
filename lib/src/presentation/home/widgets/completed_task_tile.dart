@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:todolist/src/core/task_theme_data.dart';
-import 'package:todolist/src/core/utils.dart';
-import 'package:todolist/src/features/tasks/domain/entities/task.dart';
+
+import '../../../core/task_theme_data.dart';
+import '../../../core/utils.dart';
+import '../../../features/tasks/domain/entities/task.dart';
 
 class CompletedTaskTile extends StatelessWidget {
   const CompletedTaskTile({
@@ -14,12 +15,13 @@ class CompletedTaskTile extends StatelessWidget {
   final Task task;
   final Function() onIconPressed;
   final Function() onTaskPressed;
-  
+
   @override
   Widget build(BuildContext context) {
     return ListTile(
       onTap: onTaskPressed,
-      contentPadding: EdgeInsets.symmetric(horizontal: contextSize(context).width * 0.015),
+      contentPadding:
+          EdgeInsets.symmetric(horizontal: contextSize(context).width * 0.015),
       visualDensity: VisualDensity.compact,
       leading: IconButton(
         icon: Icon(

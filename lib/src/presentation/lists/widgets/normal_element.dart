@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todolist/src/features/list/application/list_providers.dart';
-import 'package:todolist/src/features/list/domain/entities/list_of_task.dart';
-import 'package:todolist/src/features/tasks/application/tasks_provider.dart';
-import 'package:todolist/src/presentation/home/home_page.dart';
 
+import '../../../features/list/application/list_providers.dart';
+import '../../../features/list/domain/entities/list_of_task.dart';
+import '../../../features/tasks/application/tasks_provider.dart';
+import '../../home/home_page.dart';
 
 class NormalElement extends StatelessWidget {
   final TaskList element;

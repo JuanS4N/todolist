@@ -1,7 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:todolist/src/features/list/domain/contracts/i_repositories.dart';
-import 'package:todolist/src/features/list/domain/entities/list_of_task.dart';
+
+import '../domain/contracts/i_repositories.dart';
+import '../domain/entities/list_of_task.dart';
 
 class CreateListNotifier extends ChangeNotifier {
   final IListRepository repository;

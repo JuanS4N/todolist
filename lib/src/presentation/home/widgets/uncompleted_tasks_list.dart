@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todolist/src/features/tasks/application/tasks_provider.dart';
-import 'package:todolist/src/presentation/home/logic/tasks_providers.dart';
+import '../logic/tasks_providers.dart';
 import '../../../features/tasks/domain/entities/task.dart';
 import '../../task_details/pages/task_page.dart';
 import 'uncompleted_task_tile.dart';
@@ -39,8 +38,10 @@ class UncompletedTasksList extends StatelessWidget {
             );
             if (result != task) print(result);
           },
-          onDateChanged: (DateTime newDate) async{
-            await context.read(tasksListProvider).updateTask(task.copyWith(date: newDate));
+          onDateChanged: (DateTime newDate) async {
+            await context
+                .read(tasksListProvider)
+                .updateTask(task.copyWith(date: newDate));
             // onChanged(task.copyWith(date: newDate), index);
           },
         );

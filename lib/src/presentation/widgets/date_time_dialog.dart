@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:todolist/src/core/utils.dart';
-import 'package:todolist/src/presentation/task_details/widgets/icon_prefix_widget.dart';
+
+import '../../core/utils.dart';
+import '../task_details/widgets/icon_prefix_widget.dart';
 
 class DateTimeDialog extends StatefulWidget {
   const DateTimeDialog({
