@@ -57,7 +57,7 @@ class _TaskPageState extends State<TaskPage> {
           date: _taskDate,
           completed: _task.completed,
           id: _task.id,
-          modified: DateTime.now(),
+          modified: _task.modified,
           subtasks: _task.subtasks,
         );
         await context.read(tasksListProvider).updateTask(newTask);
