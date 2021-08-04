@@ -12,41 +12,6 @@ class HomeFAB extends ConsumerWidget {
     return FloatingActionButton(
       onPressed: () async {
         createListModal(context);
-
-        // final String listId = context.read(listProvider).selectedListId;
-        // Task parentTask = Task(
-        //     title: 'Task3 - Segunda lista',
-        //     modified: DateTime.now(),
-        //     date: DateTime(2021, 8, 12),
-        //     description: 'Task description',
-        //     listId: listId);
-        // await Future.delayed(Duration(milliseconds: 2));
-        // final subtask1 = Task(
-        //   title: 'Subtask 1 P3',
-        //   parentTask: parentTask.id,
-        //   listId: listId,
-        // );
-        // await Future.delayed(Duration(milliseconds: 2));
-        // final subtask2 = Task(
-        //   title: 'Subtask 2 P3',
-        //   parentTask: parentTask.id,
-        //   listId: listId,
-        // );
-        // await Future.delayed(Duration(milliseconds: 2));
-        // final subtask2 = Task(title: 'Subtask 2 P8', parentTask: parentTask.id);
-        // await Future.delayed(Duration(milliseconds: 2));
-        // final subtask3 = Task(title: 'Subtask 3 P8', parentTask: parentTask.id);
-        // parentTask = parentTask.copyWith(subtasks: [
-        //   subtask1.id,
-        //   subtask2.id
-        // ]); //, subtask2.id, subtask3.id]);
-        // await context.read(tasksNotifierProvider).createTask(task: subtask3);
-        // await context.read(tasksNotifierProvider).createTask(task: subtask2);
-        // await context.read(tasksNotifierProvider).createTask(task: subtask1);
-        // await context
-        //     .read(tasksNotifierProvider)
-        //     .createTask(task: parentTask)
-        //     .then((value) => log('exit'));
       },
       child: Icon(Icons.add),
       elevation: 0.0,

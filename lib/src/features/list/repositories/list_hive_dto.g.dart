@@ -19,17 +19,20 @@ class HiveListObjectAdapter extends TypeAdapter<HiveListObject> {
     return HiveListObject(
       fields[0] as String,
       fields[1] as bool,
+      isDefaultList: fields[2] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, HiveListObject obj) {
     writer
-      ..writeByte(2)
+      ..writeByte(3)
       ..writeByte(0)
       ..write(obj.listName)
       ..writeByte(1)
-      ..write(obj.isActive);
+      ..write(obj.isActive)
+      ..writeByte(2)
+      ..write(obj.isDefaultList);
   }
 
   @override

@@ -10,16 +10,19 @@ class TaskList with _$TaskList {
   factory TaskList(
       {required int listId,
       required String listName,
-      required bool isActive}) = _TaskList;
+      required bool isActive,
+      required bool isDefaultList}) = _TaskList;
 
   factory TaskList.namedList(String listName) {
-    return _TaskList(isActive: false, listId: 0, listName: listName);
+    return _TaskList(
+        isActive: false, listId: 0, listName: listName, isDefaultList: false);
   }
 
   factory TaskList.fromHiveDTO(HiveListObject hiveListObject) {
     return _TaskList(
         listId: hiveListObject.key,
         listName: hiveListObject.listName,
-        isActive: hiveListObject.isActive);
+        isActive: hiveListObject.isActive,
+        isDefaultList: hiveListObject.isDefaultList);
   }
 }
