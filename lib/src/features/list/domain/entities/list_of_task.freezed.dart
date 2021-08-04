@@ -17,11 +17,15 @@ class _$TaskListTearOff {
   const _$TaskListTearOff();
 
   _TaskList call(
-      {required int listId, required String listName, required bool isActive}) {
+      {required int listId,
+      required String listName,
+      required bool isActive,
+      required bool isDefaultList}) {
     return _TaskList(
       listId: listId,
       listName: listName,
       isActive: isActive,
+      isDefaultList: isDefaultList,
     );
   }
 }
@@ -34,6 +38,7 @@ mixin _$TaskList {
   int get listId => throw _privateConstructorUsedError;
   String get listName => throw _privateConstructorUsedError;
   bool get isActive => throw _privateConstructorUsedError;
+  bool get isDefaultList => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TaskListCopyWith<TaskList> get copyWith =>
@@ -44,7 +49,7 @@ mixin _$TaskList {
 abstract class $TaskListCopyWith<$Res> {
   factory $TaskListCopyWith(TaskList value, $Res Function(TaskList) then) =
       _$TaskListCopyWithImpl<$Res>;
-  $Res call({int listId, String listName, bool isActive});
+  $Res call({int listId, String listName, bool isActive, bool isDefaultList});
 }
 
 /// @nodoc
@@ -60,6 +65,7 @@ class _$TaskListCopyWithImpl<$Res> implements $TaskListCopyWith<$Res> {
     Object? listId = freezed,
     Object? listName = freezed,
     Object? isActive = freezed,
+    Object? isDefaultList = freezed,
   }) {
     return _then(_value.copyWith(
       listId: listId == freezed
@@ -74,6 +80,10 @@ class _$TaskListCopyWithImpl<$Res> implements $TaskListCopyWith<$Res> {
           ? _value.isActive
           : isActive // ignore: cast_nullable_to_non_nullable
               as bool,
+      isDefaultList: isDefaultList == freezed
+          ? _value.isDefaultList
+          : isDefaultList // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -83,7 +93,7 @@ abstract class _$TaskListCopyWith<$Res> implements $TaskListCopyWith<$Res> {
   factory _$TaskListCopyWith(_TaskList value, $Res Function(_TaskList) then) =
       __$TaskListCopyWithImpl<$Res>;
   @override
-  $Res call({int listId, String listName, bool isActive});
+  $Res call({int listId, String listName, bool isActive, bool isDefaultList});
 }
 
 /// @nodoc
@@ -100,6 +110,7 @@ class __$TaskListCopyWithImpl<$Res> extends _$TaskListCopyWithImpl<$Res>
     Object? listId = freezed,
     Object? listName = freezed,
     Object? isActive = freezed,
+    Object? isDefaultList = freezed,
   }) {
     return _then(_TaskList(
       listId: listId == freezed
@@ -114,6 +125,10 @@ class __$TaskListCopyWithImpl<$Res> extends _$TaskListCopyWithImpl<$Res>
           ? _value.isActive
           : isActive // ignore: cast_nullable_to_non_nullable
               as bool,
+      isDefaultList: isDefaultList == freezed
+          ? _value.isDefaultList
+          : isDefaultList // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -122,7 +137,10 @@ class __$TaskListCopyWithImpl<$Res> extends _$TaskListCopyWithImpl<$Res>
 
 class _$_TaskList with DiagnosticableTreeMixin implements _TaskList {
   _$_TaskList(
-      {required this.listId, required this.listName, required this.isActive});
+      {required this.listId,
+      required this.listName,
+      required this.isActive,
+      required this.isDefaultList});
 
   @override
   final int listId;
@@ -130,10 +148,12 @@ class _$_TaskList with DiagnosticableTreeMixin implements _TaskList {
   final String listName;
   @override
   final bool isActive;
+  @override
+  final bool isDefaultList;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TaskList(listId: $listId, listName: $listName, isActive: $isActive)';
+    return 'TaskList(listId: $listId, listName: $listName, isActive: $isActive, isDefaultList: $isDefaultList)';
   }
 
   @override
@@ -143,7 +163,8 @@ class _$_TaskList with DiagnosticableTreeMixin implements _TaskList {
       ..add(DiagnosticsProperty('type', 'TaskList'))
       ..add(DiagnosticsProperty('listId', listId))
       ..add(DiagnosticsProperty('listName', listName))
-      ..add(DiagnosticsProperty('isActive', isActive));
+      ..add(DiagnosticsProperty('isActive', isActive))
+      ..add(DiagnosticsProperty('isDefaultList', isDefaultList));
   }
 
   @override
@@ -157,7 +178,10 @@ class _$_TaskList with DiagnosticableTreeMixin implements _TaskList {
                     .equals(other.listName, listName)) &&
             (identical(other.isActive, isActive) ||
                 const DeepCollectionEquality()
-                    .equals(other.isActive, isActive)));
+                    .equals(other.isActive, isActive)) &&
+            (identical(other.isDefaultList, isDefaultList) ||
+                const DeepCollectionEquality()
+                    .equals(other.isDefaultList, isDefaultList)));
   }
 
   @override
@@ -165,7 +189,8 @@ class _$_TaskList with DiagnosticableTreeMixin implements _TaskList {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(listId) ^
       const DeepCollectionEquality().hash(listName) ^
-      const DeepCollectionEquality().hash(isActive);
+      const DeepCollectionEquality().hash(isActive) ^
+      const DeepCollectionEquality().hash(isDefaultList);
 
   @JsonKey(ignore: true)
   @override
@@ -177,7 +202,8 @@ abstract class _TaskList implements TaskList {
   factory _TaskList(
       {required int listId,
       required String listName,
-      required bool isActive}) = _$_TaskList;
+      required bool isActive,
+      required bool isDefaultList}) = _$_TaskList;
 
   @override
   int get listId => throw _privateConstructorUsedError;
@@ -185,6 +211,8 @@ abstract class _TaskList implements TaskList {
   String get listName => throw _privateConstructorUsedError;
   @override
   bool get isActive => throw _privateConstructorUsedError;
+  @override
+  bool get isDefaultList => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$TaskListCopyWith<_TaskList> get copyWith =>

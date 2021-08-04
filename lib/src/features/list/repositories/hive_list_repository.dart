@@ -50,10 +50,10 @@ class HiveListRepository extends IListRepository {
       var opened = await Hive.openBox<HiveListObject>(boxName);
       if (opened.isEmpty) {
         var defaultList = TaskList(
-          isActive: true,
-          listName: 'Default List',
-          listId: 0,
-        );
+            isActive: true,
+            listName: 'Default List',
+            listId: 0,
+            isDefaultList: true);
         createList(list: defaultList);
       }
     }

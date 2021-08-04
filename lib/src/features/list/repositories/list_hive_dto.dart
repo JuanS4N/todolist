@@ -12,9 +12,13 @@ class HiveListObject extends HiveObject {
   @HiveField(1)
   bool isActive;
 
-  HiveListObject(this.listName, this.isActive);
+  @HiveField(2)
+  bool isDefaultList;
+
+  HiveListObject(this.listName, this.isActive, {this.isDefaultList = false});
 
   factory HiveListObject.fromTaskList(TaskList list) {
-    return HiveListObject(list.listName, list.isActive);
+    return HiveListObject(list.listName, list.isActive,
+        isDefaultList: list.isDefaultList);
   }
 }

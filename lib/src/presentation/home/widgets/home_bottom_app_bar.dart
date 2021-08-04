@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todolist/src/presentation/options_menu/option_menu.dart';
 
 import '../../lists/show_my_list/task_list_modal.dart';
 
@@ -19,7 +20,11 @@ class HomeBottomAppBar extends StatelessWidget {
                 listViewBottomSheet(context);
               },
               icon: Icon(Icons.menu)),
-          IconButton(onPressed: () {}, icon: Icon(Icons.more_horiz)),
+          IconButton(
+              onPressed: () {
+                displayBottomModal(context);
+              },
+              icon: Icon(Icons.more_horiz)),
         ],
       ),
     );
