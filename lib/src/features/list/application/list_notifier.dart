@@ -4,37 +4,6 @@ import 'package:flutter/material.dart';
 import '../domain/contracts/i_repositories.dart';
 import '../domain/entities/list_of_task.dart';
 
-class CreateListNotifier extends ChangeNotifier {
-  final IListRepository repository;
-
-  CreateListNotifier({required this.repository});
-
-  String _listName = "";
-  bool isNamedCorrectly = false;
-
-  set listName(String value) {
-    this._listName = value;
-    isNamedCorrectly = couldCreateList();
-    notifyListeners();
-  }
-
-  void cleanState() {
-    this._listName = "";
-    this.isNamedCorrectly = false;
-  }
-
-  bool couldCreateList() {
-    if (_listName.length > 0) {
-      return true;
-    }
-    return false;
-  }
-
-  Future createList() async {
-    await repository.createList(list: TaskList.namedList(_listName));
-  }
-}
-
 class ListNotifier extends ChangeNotifier {
   final IListRepository repository;
 
@@ -66,6 +35,17 @@ class ListNotifier extends ChangeNotifier {
       }
     });
 
+    await fetchTaskList();
+  }
+
+  Future createList(String newListName) async {
+    await repository.createList(list: TaskList.namedList(newListName));
+    await fetchTaskList();
+  }
+
+  Future renameList(String listname) async {
+    await repository.updateList(
+        list: selectedList.copyWith(listName: listname));
     await fetchTaskList();
   }
 }

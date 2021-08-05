@@ -12,9 +12,3 @@ final listProvider = ChangeNotifierProvider<ListNotifier>((ref) {
   final IListRepository repository = ref.watch(listLocalRepositoryProvider);
   return ListNotifier(repository: repository);
 });
-
-final createListProvide = ChangeNotifierProvider<CreateListNotifier>((ref) {
-  final IListRepository repository = ref.watch(listLocalRepositoryProvider);
-
-  return CreateListNotifier(repository: repository);
-});

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todolist/src/features/list/application/list_notifier.dart';
 import 'package:todolist/src/features/list/application/list_providers.dart';
+import 'package:todolist/src/presentation/create_view/create_view.dart';
+import 'package:todolist/src/presentation/options_menu/rename_list.dart';
 
 void displayBottomModal(BuildContext context) {
   showModalBottomSheet(
@@ -50,7 +52,13 @@ class MenuOption extends StatelessWidget {
             ),
             TextOption(
               textInfo: 'Rename list',
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (buildContext) => RenameListView(),
+                  ),
+                );
+              },
             ),
             TextOption(
               textInfo: 'Delete list',
