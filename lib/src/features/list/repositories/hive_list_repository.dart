@@ -63,8 +63,21 @@ class HiveListRepository extends IListRepository {
   Future<Either<DatabaseFailure, Unit>> updateList(
       {required TaskList list}) async {
     try {
-      Hive.box<HiveListObject>(BOX_NAME)
+      await Hive.box<HiveListObject>(BOX_NAME)
           .put(list.listId, HiveListObject.fromTaskList(list));
+
+      return right(unit);
+    } catch (exception) {
+      print(exception.toString());
+      return left(const DatabaseFailure.serverError());
+    }
+  }
+
+  @override
+  Future<Either<DatabaseFailure, Unit>> deleteList(
+      {required TaskList list}) async {
+    try {
+      await Hive.box<HiveListObject>(BOX_NAME).delete(list.listId);
 
       return right(unit);
     } catch (exception) {

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todolist/src/features/list/application/list_notifier.dart';
 import 'package:todolist/src/features/list/application/list_providers.dart';
+import 'package:todolist/src/features/tasks/application/tasks_provider.dart';
 import 'package:todolist/src/presentation/create_view/create_view.dart';
+import 'package:todolist/src/presentation/options_menu/delete_list.dart';
 import 'package:todolist/src/presentation/options_menu/rename_list.dart';
 
 void displayBottomModal(BuildContext context) {
@@ -63,7 +65,24 @@ class MenuOption extends StatelessWidget {
             TextOption(
               textInfo: 'Delete list',
               isActive: actualList.isDefaultList ? false : true,
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pop();
+
+                var taskProv = context.read(tasksNotifierProvider);
+                var listProv = context.read(listProvider);
+                int taskNumber = taskProv.tasks.length;
+                if (taskNumber > 0) {
+                  showDialog(
+                      context: context,
+                      builder: (_) => ConfirmDeletionDialog(
+                          onDelete: listProv.delete,
+                          taskNumber: taskNumber.toString()));
+                } else {
+                  listProv.delete();
+                }
+
+                // Insert here code to delete list
+              },
             ),
             TextOption(
               textInfo: 'Delete all completed task',

@@ -7,4 +7,5 @@ abstract class IListRepository {
   Future<Either<DatabaseFailure, Unit>> createList({required TaskList list});
   Future<Either<DatabaseFailure, List<TaskList>>> readAllList();
   Future<Either<DatabaseFailure, Unit>> updateList({required TaskList list});
+  Future<Either<DatabaseFailure, Unit>> deleteList({required TaskList list});
 }

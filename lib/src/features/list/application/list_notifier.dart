@@ -48,4 +48,9 @@ class ListNotifier extends ChangeNotifier {
         list: selectedList.copyWith(listName: listname));
     await fetchTaskList();
   }
+
+  Future delete() async {
+    await repository.deleteList(list: selectedList);
+    await fetchTaskList();
+  }
 }
