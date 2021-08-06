@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:todolist/src/presentation/splash/splash_screen_page.dart';
+import 'package:todolist/src/presentation/widgets/refresh_home.dart';
 
 class CreateBody extends StatefulWidget {
   final String actionName;
@@ -26,7 +28,8 @@ class _CreateBodyState extends State<CreateBody> {
   final double innerPadding = 20.0;
   void onPressedWithValue() {
     widget.onDonePressed(_value);
-    Navigator.of(context).pop();
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => SplashScreenPage()));
   }
 
   bool isValueCorrect() {

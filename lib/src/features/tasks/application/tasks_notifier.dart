@@ -87,6 +87,19 @@ class TasksNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> deleteTaskFromList({required String listId}) async {
+    List ids = _tasks
+        .where((element) => element.listId == listId)
+        .map((e) => e.id)
+        .toList();
+
+    print("Task to be removed ->" + ids.toString());
+
+    await tasksRepository.deleteTaskWithListId(listIds: ids);
+
+    _tasks.removeWhere((element) => ids.contains(element.id));
+  }
+
   Task getTaskById(String id) =>
       _tasks.firstWhere((listTask) => listTask.id == id);
 

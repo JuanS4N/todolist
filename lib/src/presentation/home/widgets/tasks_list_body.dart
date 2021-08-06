@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todolist/src/features/list/application/list_providers.dart';
 
 import '../../../core/utils.dart';
 import '../../../features/tasks/application/tasks_provider.dart';
@@ -24,6 +25,7 @@ class _TasksListBodyState extends State<TasksListBody> {
     return Consumer(
       builder: (contex, watch, child) {
         final read = context.read(tasksListProvider);
+        final listProv = contex.read(listProvider);
         final tasksNotifier = watch(tasksNotifierProvider);
 
         return SafeArea(
@@ -37,7 +39,7 @@ class _TasksListBodyState extends State<TasksListBody> {
                     right: contextSize(context).width * 0.1,
                     bottom: 15.0,
                   ),
-                  child: Text('List title name',
+                  child: Text(listProv.selectedList.listName,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.headline4),

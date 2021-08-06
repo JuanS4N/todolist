@@ -26,7 +26,7 @@ class ListNotifier extends ChangeNotifier {
     return _taskLists;
   }
 
-  void selectList(TaskList taskList) async {
+  Future<void> selectList(TaskList taskList) async {
     await repository.updateList(list: taskList.copyWith(isActive: true));
 
     _taskLists.forEach((element) async {
@@ -41,6 +41,8 @@ class ListNotifier extends ChangeNotifier {
   Future createList(String newListName) async {
     await repository.createList(list: TaskList.namedList(newListName));
     await fetchTaskList();
+    await selectList(
+        _taskLists.firstWhere((element) => element.listName == newListName));
   }
 
   Future renameList(String listname) async {
@@ -51,6 +53,6 @@ class ListNotifier extends ChangeNotifier {
 
   Future delete() async {
     await repository.deleteList(list: selectedList);
-    await fetchTaskList();
+    await selectList(_taskLists.firstWhere((element) => element.isDefaultList));
   }
 }

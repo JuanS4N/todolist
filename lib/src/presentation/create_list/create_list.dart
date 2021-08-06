@@ -12,10 +12,10 @@ class CreateListView extends StatelessWidget {
     return CreateBody(
       actionName: 'Create a list',
       hintText: 'List name',
-      onDonePressed: (String value) {
+      onDonePressed: (String value) async {
         var listProv = context.read(listProvider);
         print(value);
-        listProv.createList(value);
+        await listProv.createList(value);
       },
     );
   }

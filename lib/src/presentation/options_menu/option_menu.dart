@@ -6,6 +6,7 @@ import 'package:todolist/src/features/tasks/application/tasks_provider.dart';
 import 'package:todolist/src/presentation/create_view/create_view.dart';
 import 'package:todolist/src/presentation/options_menu/delete_list.dart';
 import 'package:todolist/src/presentation/options_menu/rename_list.dart';
+import 'package:todolist/src/presentation/splash/splash_screen_page.dart';
 
 void displayBottomModal(BuildContext context) {
   showModalBottomSheet(
@@ -70,15 +71,26 @@ class MenuOption extends StatelessWidget {
 
                 var taskProv = context.read(tasksNotifierProvider);
                 var listProv = context.read(listProvider);
+
                 int taskNumber = taskProv.tasks.length;
                 if (taskNumber > 0) {
                   showDialog(
                       context: context,
                       builder: (_) => ConfirmDeletionDialog(
-                          onDelete: listProv.delete,
+                          onDelete: () {
+                            taskProv.deleteTaskFromList(
+                                listId: listProv.selectedListId);
+                            listProv.delete();
+
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => SplashScreenPage()));
+                          },
                           taskNumber: taskNumber.toString()));
                 } else {
                   listProv.delete();
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => SplashScreenPage()));
                 }
 
                 // Insert here code to delete list

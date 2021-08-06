@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todolist/src/presentation/widgets/refresh_home.dart';
 
 import '../../../features/list/application/list_providers.dart';
 import '../../../features/list/domain/entities/list_of_task.dart';
@@ -25,31 +26,14 @@ class NormalElement extends StatelessWidget {
             element.listName,
             style: Theme.of(context).textTheme.bodyText1,
           ),
-          onTap: () {
+          onTap: () async {
             context.read(listProvider).selectList(element);
             context
                 .read(tasksNotifierProvider)
                 .getTasks(selectedListId: element.listId.toString());
             // context.read(tasksListProvider).setTask(element);
             Navigator.pop(context);
-            Navigator.of(context).pushReplacement(
-              PageRouteBuilder(
-                pageBuilder: (BuildContext context, Animation<double> animation,
-                        Animation<double> secondaryAnimation) =>
-                    HomePage(),
-                transitionDuration: const Duration(seconds: 1),
-                transitionsBuilder:
-                    (context, animation, secondaryAnimation, child) {
-                  final curvedAnimation = CurvedAnimation(
-                      parent: animation, curve: Curves.easeInOut);
-                  return FadeTransition(
-                    opacity: Tween<double>(begin: 0.0, end: 1.0)
-                        .animate(curvedAnimation),
-                    child: child,
-                  );
-                },
-              ),
-            );
+            Navigator.of(context).pushReplacement(pageRouteBuilder(context));
           },
         ));
   }

@@ -52,4 +52,20 @@ class HiveTasksRepository implements ITasksRepository {
       return left(const DatabaseFailure.serverError());
     }
   }
+
+  @override
+  Future<Either<DatabaseFailure, Unit>> deleteTaskWithListId(
+      {required List listIds}) async {
+    try {
+      if (!Hive.isBoxOpen('tasks'))
+        await Hive.openBox<Map<dynamic, dynamic>>('tasks');
+
+      await Hive.box<Map<dynamic, dynamic>>('tasks').deleteAll(listIds);
+
+      return right(unit);
+    } catch (e) {
+      print(e);
+      return left(const DatabaseFailure.serverError());
+    }
+  }
 }
