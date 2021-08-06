@@ -10,8 +10,8 @@ class CreateListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CreateBody(
-      actionName: 'Create list Dude!',
-      hintText: 'Give me a list name my dude',
+      actionName: 'Create a list',
+      hintText: 'List name',
       onDonePressed: (String value) {
         var listProv = context.read(listProvider);
         print(value);
