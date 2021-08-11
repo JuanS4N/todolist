@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todolist/src/presentation/splash/splash_screen_page.dart';
 import 'package:todolist/src/presentation/widgets/refresh_home.dart';
 
 import '../../../features/list/application/list_providers.dart';
@@ -33,7 +34,8 @@ class NormalElement extends StatelessWidget {
                 .getTasks(selectedListId: element.listId.toString());
             // context.read(tasksListProvider).setTask(element);
             Navigator.pop(context);
-            Navigator.of(context).pushReplacement(pageRouteBuilder(context));
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => SplashScreenPage()));
           },
         ));
   }

@@ -17,7 +17,7 @@ class _$TaskListTearOff {
   const _$TaskListTearOff();
 
   _TaskList call(
-      {required int listId,
+      {required dynamic listId,
       required String listName,
       required bool isActive,
       required bool isDefaultList}) {
@@ -35,7 +35,7 @@ const $TaskList = _$TaskListTearOff();
 
 /// @nodoc
 mixin _$TaskList {
-  int get listId => throw _privateConstructorUsedError;
+  dynamic get listId => throw _privateConstructorUsedError;
   String get listName => throw _privateConstructorUsedError;
   bool get isActive => throw _privateConstructorUsedError;
   bool get isDefaultList => throw _privateConstructorUsedError;
@@ -49,7 +49,8 @@ mixin _$TaskList {
 abstract class $TaskListCopyWith<$Res> {
   factory $TaskListCopyWith(TaskList value, $Res Function(TaskList) then) =
       _$TaskListCopyWithImpl<$Res>;
-  $Res call({int listId, String listName, bool isActive, bool isDefaultList});
+  $Res call(
+      {dynamic listId, String listName, bool isActive, bool isDefaultList});
 }
 
 /// @nodoc
@@ -71,7 +72,7 @@ class _$TaskListCopyWithImpl<$Res> implements $TaskListCopyWith<$Res> {
       listId: listId == freezed
           ? _value.listId
           : listId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as dynamic,
       listName: listName == freezed
           ? _value.listName
           : listName // ignore: cast_nullable_to_non_nullable
@@ -93,7 +94,8 @@ abstract class _$TaskListCopyWith<$Res> implements $TaskListCopyWith<$Res> {
   factory _$TaskListCopyWith(_TaskList value, $Res Function(_TaskList) then) =
       __$TaskListCopyWithImpl<$Res>;
   @override
-  $Res call({int listId, String listName, bool isActive, bool isDefaultList});
+  $Res call(
+      {dynamic listId, String listName, bool isActive, bool isDefaultList});
 }
 
 /// @nodoc
@@ -116,7 +118,7 @@ class __$TaskListCopyWithImpl<$Res> extends _$TaskListCopyWithImpl<$Res>
       listId: listId == freezed
           ? _value.listId
           : listId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as dynamic,
       listName: listName == freezed
           ? _value.listName
           : listName // ignore: cast_nullable_to_non_nullable
@@ -143,7 +145,7 @@ class _$_TaskList with DiagnosticableTreeMixin implements _TaskList {
       required this.isDefaultList});
 
   @override
-  final int listId;
+  final dynamic listId;
   @override
   final String listName;
   @override
@@ -200,13 +202,13 @@ class _$_TaskList with DiagnosticableTreeMixin implements _TaskList {
 
 abstract class _TaskList implements TaskList {
   factory _TaskList(
-      {required int listId,
+      {required dynamic listId,
       required String listName,
       required bool isActive,
       required bool isDefaultList}) = _$_TaskList;
 
   @override
-  int get listId => throw _privateConstructorUsedError;
+  dynamic get listId => throw _privateConstructorUsedError;
   @override
   String get listName => throw _privateConstructorUsedError;
   @override

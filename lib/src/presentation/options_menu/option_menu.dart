@@ -66,7 +66,7 @@ class MenuOption extends StatelessWidget {
             TextOption(
               textInfo: 'Delete list',
               isActive: actualList.isDefaultList ? false : true,
-              onPressed: () {
+              onPressed: () async {
                 Navigator.of(context).pop();
 
                 var taskProv = context.read(tasksNotifierProvider);
@@ -88,7 +88,7 @@ class MenuOption extends StatelessWidget {
                           },
                           taskNumber: taskNumber.toString()));
                 } else {
-                  listProv.delete();
+                  await listProv.delete();
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
                       builder: (context) => SplashScreenPage()));
                 }

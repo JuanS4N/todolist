@@ -8,7 +8,7 @@ part 'list_of_task.freezed.dart';
 @freezed
 class TaskList with _$TaskList {
   factory TaskList(
-      {required int listId,
+      {required dynamic listId,
       required String listName,
       required bool isActive,
       required bool isDefaultList}) = _TaskList;

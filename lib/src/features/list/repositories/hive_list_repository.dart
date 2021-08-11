@@ -77,6 +77,9 @@ class HiveListRepository extends IListRepository {
   Future<Either<DatabaseFailure, Unit>> deleteList(
       {required TaskList list}) async {
     try {
+      print("Removing $list.listId");
+      //HiveListObject hiveList = HiveListObject.fromTaskList(list);
+
       await Hive.box<HiveListObject>(BOX_NAME).delete(list.listId);
 
       return right(unit);

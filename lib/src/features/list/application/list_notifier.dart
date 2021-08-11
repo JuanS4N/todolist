@@ -54,5 +54,6 @@ class ListNotifier extends ChangeNotifier {
   Future delete() async {
     await repository.deleteList(list: selectedList);
     await selectList(_taskLists.firstWhere((element) => element.isDefaultList));
+    await fetchTaskList();
   }
 }
